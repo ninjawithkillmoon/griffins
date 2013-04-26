@@ -5,6 +5,7 @@ gem 'jquery-rails'
 gem 'bcrypt-ruby'
 gem 'rails_config'
 gem 'formatted_rails_logger'
+gem 'bootstrap-sass'
 
 group :development do
   gem 'sqlite3'
