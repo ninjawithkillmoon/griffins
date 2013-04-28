@@ -35,4 +35,26 @@ module SessionsHelper
     session[:return_to] = request.url
   end
 
+  def admin_user
+    unless !current_user.nil? && current_user.admin?
+      flash[:error] = t(:not_authorized)
+      redirect_to root_path
+    end
+  end
+
+  def signed_in_user
+    unless signed_in?
+      store_location
+      flash[:notice] = t(:sign_in_first)
+      redirect_to signin_url
+    end
+  end
+
+  def signed_out_user
+    if signed_in?
+      flash[:notice] = t(:sign_out_first)
+      redirect_to root_path
+    end
+  end
+
 end

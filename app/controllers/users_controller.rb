@@ -50,25 +50,10 @@ class UsersController < ApplicationController
     redirect_to users_url
   end
 
-  private
+  private # ---------------------------------------------------------------------------
 
   def fetch_user
     @user = User.find(params[:id])
-  end
-
-  def signed_in_user
-    unless signed_in?
-      store_location
-      flash[:notice] = t(:sign_in_first)
-      redirect_to signin_url
-    end
-  end
-
-  def signed_out_user
-    if signed_in?
-      flash[:notice] = t(:sign_out_first)
-      redirect_to root_path
-    end
   end
 
   # Checks that the current signed in user is the same as the one being operated on (from params).
@@ -90,13 +75,6 @@ class UsersController < ApplicationController
     if current_user?(@user)
       flash[:error] = t(:not_authorized)
       redirect_to @user
-    end
-  end
-
-  def admin_user
-    unless current_user.admin?
-      flash[:error] = t(:not_authorized)
-      redirect_to root_path
     end
   end
 end

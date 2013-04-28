@@ -5,23 +5,33 @@ en:
   activerecord:
     attributes:
       user:
-        password_digest: "Password"
+        password_digest: Password
 
-  # flashes
-  not_authorized: "You are not authorized to perform this action"
-  profile_updated: "Profile updated"
-  welcome: "Welcome to %{title}"
-  invalid_login: "Invalid email/password combination"
-  user_deleted: "User deleted"
-  sign_out_first: "Please sign out to continue"
-  sign_in_first: "Please sign in to continue"
+  welcome: Welcome to %{title}
 
-  # buttons
-  button_signup: "Sign up now!"
+  # SESSIONS
+  invalid_login: Invalid email/password combination
+  sign_out_first: Please sign out to continue
+  sign_in_first: Please sign in to continue
+  not_authorized: You are not authorized to perform this action
 
-  # confirmations
+  # USERS
+  user_deleted: User deleted
+  profile_updated: User updated
+  button_signup: Sign up now
   confirm_user_delete: |+
     Are you sure you want to delete the following user:
+
+    ID %{id}
+    %{name}
+    %{email}
+
+  # PLAYERS
+  player_created: Player created
+  player_updated: Player updated
+  player_deleted: Player deleted
+  confirm_player_delete: |+
+    Are you sure you want to delete the following player:
 
     ID %{id}
     %{name}
