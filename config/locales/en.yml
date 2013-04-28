@@ -12,9 +12,18 @@ en:
   profile_updated: "Profile updated"
   welcome: "Welcome to %{title}"
   invalid_login: "Invalid email/password combination"
+  user_deleted: "User deleted"
 
   # buttons
   button_signup: "Sign up now!"
+
+  # confirmations
+  confirm_user_delete: |+
+    Are you sure you want to delete the following user:
+
+    ID %{id}
+    %{name}
+    %{email}
 
   date:
     abbr_day_names:
