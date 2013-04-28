@@ -11,7 +11,54 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130428010651) do
+ActiveRecord::Schema.define(:version => 20130428050403) do
+
+  create_table "competitions", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "divisions", :force => true do |t|
+    t.string   "name"
+    t.integer  "sex"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.integer  "season_id"
+  end
+
+  create_table "players", :force => true do |t|
+    t.string   "name_family"
+    t.string   "name_given"
+    t.integer  "student_number"
+    t.string   "email"
+    t.boolean  "male"
+    t.date     "date_of_birth"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
+  create_table "players_teams", :id => false, :force => true do |t|
+    t.integer "player_id"
+    t.integer "team_id"
+  end
+
+  create_table "seasons", :force => true do |t|
+    t.string   "name"
+    t.date     "date_start"
+    t.decimal  "cost"
+    t.decimal  "cost_student"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+    t.integer  "competition_id"
+  end
+
+  create_table "teams", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.integer  "division_id"
+  end
 
   create_table "users", :force => true do |t|
     t.string   "name"
@@ -21,6 +68,7 @@ ActiveRecord::Schema.define(:version => 20130428010651) do
     t.string   "password_digest"
     t.string   "remember_token"
     t.boolean  "admin",           :default => false
+    t.integer  "sex"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
