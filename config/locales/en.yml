@@ -13,6 +13,8 @@ en:
   welcome: "Welcome to %{title}"
   invalid_login: "Invalid email/password combination"
   user_deleted: "User deleted"
+  sign_out_first: "Please sign out to continue"
+  sign_in_first: "Please sign in to continue"
 
   # buttons
   button_signup: "Sign up now!"
