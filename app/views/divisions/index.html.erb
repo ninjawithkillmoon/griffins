@@ -1,0 +1,23 @@
+<% provide(:title, 'All Divisions') %>
+<h1><%=yield(:title) %></h1>
+
+<%= will_paginate %>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Sex</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+  <%=render @divisions %>
+
+</table>
+
+<br />
+
+<%= link_to 'New Division', new_division_path %>
+
+<%= will_paginate %>

@@ -5,10 +5,10 @@
       <h1>
         <%= full_name(@player) %>
       </h1>
-      <span><%= sex_string(@player) %></span>
+      <span><%= sex_string(@player.sex) %></span>
       <span>System ID: <%= @player.id%></span>
       <span>Student ID: <%= @player.student_number %></span>
-      <span><%= @player.date_of_birth %> (<%=age(@player.date_of_birth) %>)</span>
+      <span><%= @player.date_of_birth %><%=(" (#{age(@player.date_of_birth)})") unless @player.date_of_birth.nil? %></span>
       <span><%= @player.email %></span>
     </section>
   </aside>

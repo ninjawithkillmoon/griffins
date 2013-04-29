@@ -37,6 +37,48 @@ en:
     %{name}
     %{email}
 
+  # TEAMS
+  team_created: Team created
+  team_updated: Team updated
+  team_deleted: Team deleted
+  confirm_team_delete: |+
+    Are you sure you want to delete the following team:
+
+    ID %{id}
+    %{name}
+
+  # DIVISIONS
+  division_created: Division created
+  division_updated: Division updated
+  division_deleted: Division deleted
+  confirm_division_delete: |+
+    Are you sure you want to delete the following division:
+
+    ID %{id}
+    %{name}
+    %{sex}
+
+  # SEASONS
+  season_created: Season created
+  season_updated: Season updated
+  season_deleted: Season deleted
+  confirm_season_delete: |+
+    Are you sure you want to delete the following season:
+
+    ID %{id}
+    %{name}
+    %{date_start}
+
+  # COMPETITIONS
+  competition_created: Competition created
+  competition_updated: Competition updated
+  competition_deleted: Competition deleted
+  confirm_competition_delete: |+
+    Are you sure you want to delete the following competition:
+
+    ID %{id}
+    %{name}
+
   date:
     abbr_day_names:
     - Sun

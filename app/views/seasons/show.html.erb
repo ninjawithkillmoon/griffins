@@ -1,0 +1,17 @@
+<% provide(:title, @season.name) %>
+<div class="row">
+  <aside class="span4">
+    <section>
+      <h1>
+        <%= @season.name %>
+      </h1>
+      <span>System ID: <%= @season.id%></span>
+      <span>Starts on <%=@season.date_start %></span>
+      <span>Cost: <%=@season.cost %></span>
+      <span>Cost (Student): <%=@season.cost_student %></span>
+    </section>
+  </aside>
+</div>
+
+<%= link_to 'Edit', edit_season_path(@season) %> |
+<%= link_to 'List', seasons_path %>

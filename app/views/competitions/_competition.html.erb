@@ -1,0 +1,6 @@
+<tr>
+  <td><%=competition.name %></td>
+  <td><%= link_to 'Show', competition %></td>
+  <td><%= link_to 'Edit', edit_competition_path(competition) %></td>
+  <td><%= link_to 'Destroy', competition, method: :delete, data: { confirm: t(:confirm_competition_delete, {id: competition.id, name: competition.name}) } %></td>
+</tr>

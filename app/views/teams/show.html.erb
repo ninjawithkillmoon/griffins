@@ -1,0 +1,15 @@
+<% provide(:title, @team.name) %>
+<div class="row">
+  <aside class="span4">
+    <section>
+      <h1>
+        <%= @team.name %>
+      </h1>
+      <span>Sex: </span>
+      <span>System ID: <%= @team.id%></span>
+    </section>
+  </aside>
+</div>
+
+<%= link_to 'Edit', edit_team_path(@team) %> |
+<%= link_to 'List', teams_path %>

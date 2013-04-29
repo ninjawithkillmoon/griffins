@@ -1,0 +1,6 @@
+<tr>
+  <td><%=team.name %></td>
+  <td><%= link_to 'Show', team %></td>
+  <td><%= link_to 'Edit', edit_team_path(team) %></td>
+  <td><%= link_to 'Destroy', team, method: :delete, data: { confirm: t(:confirm_team_delete, {id: team.id, name: team.name}) } %></td>
+</tr>

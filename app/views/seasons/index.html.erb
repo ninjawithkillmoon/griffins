@@ -1,0 +1,25 @@
+<% provide(:title, 'All Seasons') %>
+<h1><%=yield(:title) %></h1>
+
+<%= will_paginate %>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Start Date</th>
+    <th>Cost</th>
+    <th>Cost (Student)</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+  <%=render @seasons %>
+
+</table>
+
+<br />
+
+<%= link_to 'New Season', new_season_path %>
+
+<%= will_paginate %>

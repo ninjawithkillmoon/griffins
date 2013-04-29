@@ -1,9 +1,9 @@
-<% provide(:title, "Edit User") %> 
-<h1><%=yield(:title) %></h1>
+<% provide(:title, "Edit Season") %> 
+<h1><%=@season.name %></h1>
 
 <div class="row">
   <div class="span6 offset3">
-    <%= form_for(@user) do |f| %>
+    <%= form_for(@season) do |f| %>
       
       <%=render 'fields', f: f %>
 
@@ -11,3 +11,6 @@
     <% end %>
   </div>
 </div>
+
+<%= link_to 'Show', @season %> |
+<%= link_to 'List', seasons_path %>

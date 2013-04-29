@@ -1,0 +1,15 @@
+<% provide(:title, @division.name) %>
+<div class="row">
+  <aside class="span4">
+    <section>
+      <h1>
+        <%= @division.name %>
+      </h1>
+      <span><%=sex_string(@division.sex) %></span>
+      <span>System ID: <%= @division.id%></span>
+    </section>
+  </aside>
+</div>
+
+<%= link_to 'Edit', edit_division_path(@division) %> |
+<%= link_to 'List', divisions_path %>

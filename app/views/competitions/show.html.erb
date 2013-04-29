@@ -1,0 +1,14 @@
+<% provide(:title, @competition.name) %>
+<div class="row">
+  <aside class="span4">
+    <section>
+      <h1>
+        <%= @competition.name %>
+      </h1>
+      <span>System ID: <%= @competition.id%></span>
+    </section>
+  </aside>
+</div>
+
+<%= link_to 'Edit', edit_competition_path(@competition) %> |
+<%= link_to 'List', competitions_path %>

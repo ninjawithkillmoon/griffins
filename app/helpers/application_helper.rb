@@ -35,4 +35,24 @@ module ApplicationHelper
     end
   end
 
+  # Returns a full text representation of the integer parameter as a sex type.
+  #
+  # Sex types are found in /config/initializers/constants.rb.
+  #
+  # * *Args*    :
+  #   - ++ -> 
+  # * *Returns* :
+  #   - 
+  #
+  def sex_string(p_sex)
+    case p_sex
+    when SEX_MALE
+      return "Male"
+    when SEX_FEMALE
+      return "Female"
+    when SEX_MIXED
+      return "Mixed"
+    end
+  end
+
 end

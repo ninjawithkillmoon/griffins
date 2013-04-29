@@ -1,0 +1,22 @@
+<% provide(:title, 'All Competitions') %>
+<h1><%=yield(:title) %></h1>
+
+<%= will_paginate %>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+  <%=render @competitions %>
+
+</table>
+
+<br />
+
+<%= link_to 'New Competition', new_competition_path %>
+
+<%= will_paginate %>

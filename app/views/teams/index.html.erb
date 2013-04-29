@@ -1,0 +1,22 @@
+<% provide(:title, 'All Teams') %>
+<h1><%=yield(:title) %></h1>
+
+<%= will_paginate %>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+  <%=render @teams %>
+
+</table>
+
+<br />
+
+<%= link_to 'New Team', new_team_path %>
+
+<%= will_paginate %>

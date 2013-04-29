@@ -1,0 +1,7 @@
+<%= render 'shared/error_messages', resource: @division %>
+
+<%= f.label :name, "Name" %>
+<%= f.text_field :name %>
+
+<%= f.label :sex %>
+<%= f.select :sex, {Male: SEX_MALE, Female: SEX_FEMALE, Mixed: SEX_MIXED} %>
