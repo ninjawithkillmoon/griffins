@@ -8,16 +8,11 @@
       <%= dtdd 'Name', full_name(@player) %>
       <%= dtdd 'Sex', sex_string(@player.sex) %>
       <%= dtdd 'Student ID', (@player.student_number.blank? ? raw('&nbsp;') : @player.student_number) %>
-      <%= dtdd 'Date of Birth', (@player.date_of_birth.blank? ? raw('&nbsp;') : "#{@player.date_of_birth} (#{age(@player.date_of_birth)})") %>
+      <%= dtdd 'Date of Birth', (@player.date_of_birth.blank? ? raw('&nbsp;') : "#{l(@player.date_of_birth, format: :long)} (#{age(@player.date_of_birth)})") %>
       <%= dtdd 'Email', @player.email %>
-      <dt>
-
-      </dt>
-      <dd>
-        <% if admin? %>
-          <%= link_to 'Edit', edit_player_path(@player), class: "btn btn-large btn-warning" %>
-        <% end %>
-      </dd>
+      <% if admin? %>
+        <%= dtdd '', link_to('Edit', edit_player_path(@player), class: "btn btn-large btn-warning") %>
+      <% end %>
     </dl>
   </div>
 </div>

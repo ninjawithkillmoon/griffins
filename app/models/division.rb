@@ -11,7 +11,7 @@
 #
 
 class Division < ActiveRecord::Base
-  attr_accessible :name, :sex
+  attr_accessible :name, :sex, :season_id
 
   has_many :teams, dependent: :destroy
   belongs_to :season

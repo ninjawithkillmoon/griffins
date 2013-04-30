@@ -18,14 +18,9 @@
           </ul>
         </dd>
       <% end %>
-      <dt>
-
-      </dt>
-      <dd>
-        <% if admin? %>
-          <%= link_to 'Edit', edit_competition_path(@competition), class: "btn btn-large btn-warning" %>
-        <% end %>
-      </dd>
+      <% if admin? %>
+        <%= dtdd '', link_to('Edit', edit_competition_path(@competition), class: "btn btn-large btn-warning") %>
+      <% end %>
     </dl>
   </div>
 </div>

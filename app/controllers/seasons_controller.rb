@@ -27,7 +27,6 @@ class SeasonsController < ApplicationController
 
   def edit
     fetch_season
-    @competitions = Competition.all
   end
 
   def update

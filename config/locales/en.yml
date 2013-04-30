@@ -114,6 +114,7 @@ en:
     formats:
       default: ! '%d-%m-%Y'
       long: ! '%B %d, %Y'
+      medium: ! '%B %Y'
       short: ! '%b %d'
     month_names:
     - 

@@ -7,14 +7,9 @@
     <dl class="dl-horizontal">
       <%= dtdd 'Name', @team.name %>
       <%= dtdd 'Sex', (@team.division.nil? ? raw("&nbsp;") : sex_string(@team.division.sex)) %>
-      <dt>
-
-      </dt>
-      <dd>
-        <% if admin? %>
-          <%= link_to 'Edit', edit_team_path(@team), class: "btn btn-large btn-warning" %>
-        <% end %>
-      </dd>
+      <% if admin? %>
+        <%= dtdd '', link_to('Edit', edit_team_path(@team), class: "btn btn-large btn-warning") %>
+      <% end %>
     </dl>
 
 

@@ -6,17 +6,25 @@
   <div class="span6 offset3">
     <dl class="dl-horizontal">
       <%= dtdd 'Name', @season.name %>
-      <%= dtdd 'Start Date', @season.date_start %>
-      <%= dtdd 'Cost', @season.cost %>
-      <%= dtdd 'Student Cost', @season.cost_student %>
-      <dt>
-
-      </dt>
-      <dd>
-        <% if admin? %>
-          <%= link_to 'Edit', edit_season_path(@season), class: "btn btn-large btn-warning" %>
-        <% end %>
-      </dd>
+      <%= dtdd 'Start Date', l(@season.date_start, format: :medium) %>
+      <%= dtdd 'Cost', number_to_currency(@season.cost) %>
+      <%= dtdd 'Student Cost', number_to_currency(@season.cost_student) %>
+      <%= dtdd 'Competition', (@season.competition.nil? ? "&nbsp;" : link_to(@season.competition.name, @season.competition)) %>
+      <% unless @season.divisions.empty? %>
+        <dt>
+          Divisions
+        </dt>
+        <dd>
+          <ul class="unstyled">
+            <% @season.divisions.each do |division| %>
+              <li><%= link_to division.name, division_path(division) %></li>
+            <% end %>
+          </ul>
+        </dd>
+      <% end %>
+      <% if admin? %>
+        <%= dtdd '', link_to('Edit', edit_season_path(@season), class: "btn btn-large btn-warning") %>
+      <% end %>
     </dl>
   </div>
 </div>

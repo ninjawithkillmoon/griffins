@@ -1,10 +1,10 @@
 <tr>
   <td><%= link_to player.name_family, player %></td>
   <td><%= link_to player.name_given, player %></td>
-  <td><%=sex_string(player.sex) %></td>
-  <td><%=player.student_number %></td>
-  <td><%=player.date_of_birth %></td>
-  <td><%=player.email %></td>
+  <td><%= sex_string(player.sex) %></td>
+  <td><%= player.student_number %></td>
+  <td><%= l player.date_of_birth, format: :long %></td>
+  <td><%= player.email %></td>
   <% if admin? %>
     <td><%= link_to 'Edit', edit_player_path(player), {class: "btn btn-warning"} %></td>
     <td><%= link_to 'Delete', player, class: "btn btn-danger", method: :delete, data: { confirm: t(:confirm_player_delete, {id: player.id, name: player.name_given + " " + player.name_family, email: player.email}) } %></td>

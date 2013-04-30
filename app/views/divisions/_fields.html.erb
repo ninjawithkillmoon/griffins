@@ -13,3 +13,10 @@
     <%= f.select :sex, {Male: SEX_MALE, Female: SEX_FEMALE, Mixed: SEX_MIXED} %>
   </div>
 </div>
+
+<div class="control-group">
+  <%= f.label :season_id, class: "control-label" %>
+  <div class="controls">
+    <%= f.select :season_id, Season.all.collect { |season| [season.name, season.id] }, {} %>
+  </div>
+</div>
