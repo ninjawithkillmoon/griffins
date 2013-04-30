@@ -1,18 +1,23 @@
 <% provide(:title, @division.name) %>
+<h1>
+  <%= @division.name %>
+</h1>
 <div class="row">
-  <aside class="span4">
-    <section>
-      <h1>
-        <%= @division.name %>
-      </h1>
-      <span><%=sex_string(@division.sex) %></span>
-      <span>System ID: <%= @division.id%></span>
-    </section>
-  </aside>
+  <div class="span6 offset3">
+    <dl class="dl-horizontal">
+      <%= dtdd 'Name', @division.name %>
+      <%= dtdd 'Sex', sex_string(@division.sex) %>
+      <dt>
+
+      </dt>
+      <dd>
+        <% if admin? %>
+          <%= link_to 'Edit', edit_division_path(@division), class: "btn btn-large btn-warning" %>
+        <% end %>
+      </dd>
+    </dl>
+  </div>
 </div>
 
-<% if admin? %>
-  <%= link_to 'Edit', edit_division_path(@division) %> |
-<% end %>
-
-<%= link_to 'List', divisions_path %>
+<% provide :leftNavButtonBody, 'Divisions' %>
+<% provide :leftNavButtonUrl, divisions_path %>

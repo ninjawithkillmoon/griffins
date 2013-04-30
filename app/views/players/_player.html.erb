@@ -1,15 +1,12 @@
 <tr>
-  <td><%=player.name_family %></td>
-  <td><%=player.name_given %></td>
-  <td><%=player.sex %></td>
+  <td><%= link_to player.name_family, player %></td>
+  <td><%= link_to player.name_given, player %></td>
+  <td><%=sex_string(player.sex) %></td>
   <td><%=player.student_number %></td>
   <td><%=player.date_of_birth %></td>
   <td><%=player.email %></td>
-  <td><%= link_to 'Show', player %></td>
   <% if admin? %>
-    <td><%= link_to 'Edit', edit_player_path(player) %></td>
-    <td><%= link_to 'Destroy', player, method: :delete, data: { confirm: t(:confirm_player_delete, {id: player.id,
-                                                                                                    name: player.name_given + " " + player.name_family,
-                                                                                                    email: player.email}) } %></td>
+    <td><%= link_to 'Edit', edit_player_path(player), {class: "btn btn-warning"} %></td>
+    <td><%= link_to 'Delete', player, class: "btn btn-danger", method: :delete, data: { confirm: t(:confirm_player_delete, {id: player.id, name: player.name_given + " " + player.name_family, email: player.email}) } %></td>
   <% end %>
 </tr>

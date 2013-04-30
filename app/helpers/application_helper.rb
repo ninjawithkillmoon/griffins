@@ -55,4 +55,7 @@ module ApplicationHelper
     end
   end
 
+  def dtdd(p_dt, p_dd)
+    return render 'layouts/components/dt_dd', dt: p_dt, dd: p_dd
+  end
 end

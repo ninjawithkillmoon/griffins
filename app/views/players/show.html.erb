@@ -1,21 +1,26 @@
 <% provide(:title, full_name(@player)) %>
+<h1>
+  <%= full_name(@player) %>
+</h1>
 <div class="row">
-  <aside class="span4">
-    <section>
-      <h1>
-        <%= full_name(@player) %>
-      </h1>
-      <span><%= sex_string(@player.sex) %></span>
-      <span>System ID: <%= @player.id%></span>
-      <span>Student ID: <%= @player.student_number %></span>
-      <span><%= @player.date_of_birth %><%=(" (#{age(@player.date_of_birth)})") unless @player.date_of_birth.nil? %></span>
-      <span><%= @player.email %></span>
-    </section>
-  </aside>
+  <div class="span6 offset3">
+    <dl class="dl-horizontal">
+      <%= dtdd 'Name', full_name(@player) %>
+      <%= dtdd 'Sex', sex_string(@player.sex) %>
+      <%= dtdd 'Student ID', (@player.student_number.blank? ? raw('&nbsp;') : @player.student_number) %>
+      <%= dtdd 'Date of Birth', (@player.date_of_birth.blank? ? raw('&nbsp;') : "#{@player.date_of_birth} (#{age(@player.date_of_birth)})") %>
+      <%= dtdd 'Email', @player.email %>
+      <dt>
+
+      </dt>
+      <dd>
+        <% if admin? %>
+          <%= link_to 'Edit', edit_player_path(@player), class: "btn btn-large btn-warning" %>
+        <% end %>
+      </dd>
+    </dl>
+  </div>
 </div>
 
-<% if admin? %>
-  <%= link_to 'Edit', edit_player_path(@player) %> |
-<% end %>
-
-<%= link_to 'List', players_path %>
+<% provide :leftNavButtonBody, 'Players' %>
+<% provide :leftNavButtonUrl, players_path %>

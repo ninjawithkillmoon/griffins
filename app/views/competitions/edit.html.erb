@@ -1,16 +1,24 @@
 <% provide(:title, "Edit Competition") %> 
-<h1><%=@competition.name %></h1>
+<h1>
+  <%=@competition.name %>
+  <small>
+    Edit
+  </small>
+</h1>
 
 <div class="row">
   <div class="span6 offset3">
-    <%= form_for(@competition) do |f| %>
+    <%= form_for(@competition, html: {class: "form-horizontal well"}) do |f| %>
       
       <%=render 'fields', f: f %>
 
-      <%= f.submit "Save changes", class: "btn btn-large btn-primary" %>
+      <div class="form-actions">
+        <%= f.submit "Save changes", class: "btn btn-large btn-success" %>
+        <%= link_to 'Cancel', @competition, class: "btn btn-large" %>
+      </div>
     <% end %>
   </div>
 </div>
 
-<%= link_to 'Show', @competition %> |
-<%= link_to 'List', competitions_path %>
+<% provide :leftNavButtonBody, 'Competitions' %>
+<% provide :leftNavButtonUrl, competitions_path %>

@@ -3,13 +3,14 @@
 
 <%= will_paginate %>
 
-<table>
+<table class="table table-striped table-bordered table-hover">
   <tr>
     <th>Name</th>
     <th>Sex</th>
-    <th></th>
-    <th></th>
-    <th></th>
+    <% if admin? %>
+      <th></th>
+      <th></th>
+    <% end %>
   </tr>
 
   <%=render @divisions %>
@@ -19,7 +20,13 @@
 <br />
 
 <% if admin? %>
-  <%= link_to 'New Division', new_division_path %>
+  <%= link_to 'New Division', new_division_path, class: "btn btn-large btn-primary" %>
 <% end %>
+
+<% provide :leftNavButtonBody, 'Seasons' %>
+<% provide :leftNavButtonUrl, seasons_path %>
+
+<% provide :rightNavButtonBody, 'Teams' %>
+<% provide :rightNavButtonUrl, teams_path %>
 
 <%= will_paginate %>

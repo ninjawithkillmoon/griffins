@@ -1,8 +1,7 @@
 <tr>
-  <td><%=team.name %></td>
-  <td><%= link_to 'Show', team %></td>
+  <td><%= link_to team.name, team %></td>
   <% if admin? %>
-    <td><%= link_to 'Edit', edit_team_path(team) %></td>
-    <td><%= link_to 'Destroy', team, method: :delete, data: { confirm: t(:confirm_team_delete, {id: team.id, name: team.name}) } %></td>
+    <td><%= link_to 'Edit', edit_team_path(team), {class: "btn btn-warning"} %></td>
+    <td><%= link_to 'Delete', team, class: "btn btn-danger", method: :delete, data: { confirm: t(:confirm_team_delete, {id: team.id, name: team.name}) } %></td>
   <% end %>
 </tr>

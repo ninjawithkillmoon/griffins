@@ -1,19 +1,26 @@
 <% provide(:title, @team.name) %>
+<h1>
+  <%= @team.name %>
+</h1>
 <div class="row">
-  <aside class="span4">
-    <section>
-      <h1>
-        <%= @team.name %>
-      </h1>
-      <span>Sex: </span>
-      <span>System ID: <%= @team.id%></span>
-    </section>
-  </aside>
+  <div class="span6 offset3">
+    <dl class="dl-horizontal">
+      <%= dtdd 'Name', @team.name %>
+      <%= dtdd 'Sex', (@team.division.nil? ? raw("&nbsp;") : sex_string(@team.division.sex)) %>
+      <dt>
+
+      </dt>
+      <dd>
+        <% if admin? %>
+          <%= link_to 'Edit', edit_team_path(@team), class: "btn btn-large btn-warning" %>
+        <% end %>
+      </dd>
+    </dl>
+
+
+    
+  </div>
 </div>
 
-
-<% if admin? %>
-  <%= link_to 'Edit', edit_team_path(@team) %> |
-<% end %>
-
-<%= link_to 'List', teams_path %>
+<% provide :leftNavButtonBody, 'Teams' %>
+<% provide :leftNavButtonUrl, teams_path %>

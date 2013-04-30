@@ -1,8 +1,7 @@
 <tr>
-  <td><%=competition.name %></td>
-  <td><%= link_to 'Show', competition %></td>
+  <td><%= link_to competition.name, competition %></td>
   <% if admin? %>
-    <td><%= link_to 'Edit', edit_competition_path(competition) %></td>
-    <td><%= link_to 'Destroy', competition, method: :delete, data: { confirm: t(:confirm_competition_delete, {id: competition.id, name: competition.name}) } %></td>
+    <td><%= link_to 'Edit', edit_competition_path(competition), {class: "btn btn-warning"} %></td>
+    <td><%= link_to 'Delete', competition, class: "btn btn-danger", method: :delete, data: { confirm: t(:confirm_competition_delete, {id: competition.id, name: competition.name}) } %></td>
   <% end %>
 </tr>

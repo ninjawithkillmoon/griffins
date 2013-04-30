@@ -1,20 +1,25 @@
 <% provide(:title, @season.name) %>
+<h1>
+  <%= @season.name %>
+</h1>
 <div class="row">
-  <aside class="span4">
-    <section>
-      <h1>
-        <%= @season.name %>
-      </h1>
-      <span>System ID: <%= @season.id%></span>
-      <span>Starts on <%=@season.date_start %></span>
-      <span>Cost: <%=@season.cost %></span>
-      <span>Cost (Student): <%=@season.cost_student %></span>
-    </section>
-  </aside>
+  <div class="span6 offset3">
+    <dl class="dl-horizontal">
+      <%= dtdd 'Name', @season.name %>
+      <%= dtdd 'Start Date', @season.date_start %>
+      <%= dtdd 'Cost', @season.cost %>
+      <%= dtdd 'Student Cost', @season.cost_student %>
+      <dt>
+
+      </dt>
+      <dd>
+        <% if admin? %>
+          <%= link_to 'Edit', edit_season_path(@season), class: "btn btn-large btn-warning" %>
+        <% end %>
+      </dd>
+    </dl>
+  </div>
 </div>
 
-<% if admin? %>
-  <%= link_to 'Edit', edit_season_path(@season) %> |
-<% end %>
-
-<%= link_to 'List', seasons_path %>
+<% provide :leftNavButtonBody, 'Seasons' %>
+<% provide :leftNavButtonUrl, seasons_path %>

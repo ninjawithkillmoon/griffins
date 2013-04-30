@@ -3,22 +3,24 @@
 
 <%= will_paginate %>
 
-<table>
+<table class="table table-striped table-bordered table-hover">
   <tr>
     <th>Name</th>
-    <th></th>
-    <th></th>
-    <th></th>
+    <% if admin? %>
+      <th></th>
+      <th></th>
+    <% end %>
   </tr>
 
   <%=render @competitions %>
 
 </table>
 
-<br />
-
 <% if admin? %>
-  <%= link_to 'New Competition', new_competition_path %>
+  <%= link_to('New Competition', new_competition_path, class: "btn btn-large btn-primary") %>
 <% end %>
+
+<% provide :rightNavButtonBody, 'Seasons' %>
+<% provide :rightNavButtonUrl, seasons_path %>
 
 <%= will_paginate %>
