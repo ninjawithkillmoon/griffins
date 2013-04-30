@@ -11,5 +11,8 @@
   </aside>
 </div>
 
-<%= link_to 'Edit', edit_division_path(@division) %> |
+<% if admin? %>
+  <%= link_to 'Edit', edit_division_path(@division) %> |
+<% end %>
+
 <%= link_to 'List', divisions_path %>

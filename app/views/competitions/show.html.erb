@@ -10,5 +10,8 @@
   </aside>
 </div>
 
-<%= link_to 'Edit', edit_competition_path(@competition) %> |
+<% if admin? %>
+  <%= link_to 'Edit', edit_competition_path(@competition) %> |
+<% end %>
+
 <%= link_to 'List', competitions_path %>

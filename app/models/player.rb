@@ -1,3 +1,18 @@
+# == Schema Information
+#
+# Table name: players
+#
+#  id             :integer          not null, primary key
+#  name_family    :string(255)
+#  name_given     :string(255)
+#  student_number :integer
+#  email          :string(255)
+#  date_of_birth  :date
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#  sex            :integer
+#
+
 class Player < ActiveRecord::Base
   attr_accessible :date_of_birth, :email, :sex, :name_family, :name_given, :student_number
 

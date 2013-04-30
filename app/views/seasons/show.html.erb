@@ -13,5 +13,8 @@
   </aside>
 </div>
 
-<%= link_to 'Edit', edit_season_path(@season) %> |
+<% if admin? %>
+  <%= link_to 'Edit', edit_season_path(@season) %> |
+<% end %>
+
 <%= link_to 'List', seasons_path %>

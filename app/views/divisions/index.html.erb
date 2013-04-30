@@ -18,6 +18,8 @@
 
 <br />
 
-<%= link_to 'New Division', new_division_path %>
+<% if admin? %>
+  <%= link_to 'New Division', new_division_path %>
+<% end %>
 
 <%= will_paginate %>

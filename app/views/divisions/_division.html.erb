@@ -2,6 +2,8 @@
   <td><%=division.name %></td>
   <td><%=sex_string(division.sex) %></td>
   <td><%= link_to 'Show', division %></td>
-  <td><%= link_to 'Edit', edit_division_path(division) %></td>
-  <td><%= link_to 'Destroy', division, method: :delete, data: { confirm: t(:confirm_division_delete, {id: division.id, name: division.name, sex: sex_string(division.sex)}) } %></td>
+  <% if admin? %>
+    <td><%= link_to 'Edit', edit_division_path(division) %></td>
+    <td><%= link_to 'Destroy', division, method: :delete, data: { confirm: t(:confirm_division_delete, {id: division.id, name: division.name, sex: sex_string(division.sex)}) } %></td>
+  <% end %>
 </tr>

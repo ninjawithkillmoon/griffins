@@ -14,6 +14,7 @@ en:
   sign_out_first: Please sign out to continue
   sign_in_first: Please sign in to continue
   not_authorized: You are not authorized to perform this action
+  signed_out: You have successfully signed out
 
   # USERS
   user_deleted: User deleted

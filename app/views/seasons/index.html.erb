@@ -20,6 +20,8 @@
 
 <br />
 
-<%= link_to 'New Season', new_season_path %>
+<% if admin? %>
+  <%= link_to 'New Season', new_season_path %>
+<% end %>
 
 <%= will_paginate %>

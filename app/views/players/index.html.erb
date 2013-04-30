@@ -22,6 +22,8 @@
 
 <br />
 
-<%= link_to 'New Player', new_player_path %>
+<% if admin? %>
+  <%= link_to 'New Player', new_player_path %>
+<% end %>
 
 <%= will_paginate %>

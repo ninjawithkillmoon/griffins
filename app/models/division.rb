@@ -1,3 +1,15 @@
+# == Schema Information
+#
+# Table name: divisions
+#
+#  id         :integer          not null, primary key
+#  name       :string(255)
+#  sex        :integer
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  season_id  :integer
+#
+
 class Division < ActiveRecord::Base
   attr_accessible :name, :sex
 
