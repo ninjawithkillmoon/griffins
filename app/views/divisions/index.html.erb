@@ -6,6 +6,7 @@
 <table class="table table-striped table-bordered table-hover">
   <tr>
     <th>Name</th>
+    <th>Year</th>
     <th>Season</th>
     <th>Sex</th>
     <% if admin? %>
@@ -21,7 +22,7 @@
 <br />
 
 <% if admin? %>
-  <%= link_to 'New Division', new_division_path, class: "btn btn-large btn-primary" %>
+  <%= link_to raw('<i class="icon-plus icon-white"></i> New Division'), new_division_path, class: "btn btn-large btn-primary" %>
 <% end %>
 
 <% provide :leftNavButtonBody, 'Seasons' %>

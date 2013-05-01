@@ -24,7 +24,7 @@
 <br />
 
 <% if admin? %>
-  <%= link_to 'New Player', new_player_path, class: "btn btn-large btn-primary" %>
+  <%= link_to raw('<i class="icon-plus icon-white"></i> New Player'), new_player_path, class: "btn btn-large btn-primary" %>
 <% end %>
 
 <% provide :leftNavButtonBody, 'Teams' %>

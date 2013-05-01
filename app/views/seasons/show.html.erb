@@ -18,7 +18,7 @@
         <dd>
           <ul class="unstyled">
             <% @season.divisions.each do |division| %>
-              <li><%= link_to division.name, division_path(division) %></li>
+              <li><%= link_to "#{division.name} (#{sex_string(division.sex)})", division_path(division) %></li>
             <% end %>
           </ul>
         </dd>

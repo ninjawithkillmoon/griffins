@@ -1,10 +1,19 @@
 <% provide(:title, @user.name) %>
+<h1>
+  <%= @user.name %>
+</h1>
 <div class="row">
-  <div class="span12">
-    <h1>
-      <%= @user.name %>
-    </h1>
-    <p>ID: <%= @user.id%></p>
-    <p><%= @user.email %></p>
+  <div class="span4 offset4">
+    <dl class="dl-horizontal">
+      <%= dtdd 'Name', @user.name %>
+      <%= dtdd 'Email', mail_to(@user.email, nil, encode: "javascript") %>
+      
+      <% if current_user? @user %>
+        <%= dtdd '', link_to('Edit', edit_user_path(@user), class: "btn btn-large btn-warning") %>
+      <% end %>
+    </dl>
   </div>
 </div>
+
+<% provide :leftNavButtonBody, 'Users' %>
+<% provide :leftNavButtonUrl, users_path %>

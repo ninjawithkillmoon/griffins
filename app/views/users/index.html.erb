@@ -3,8 +3,21 @@
 
 <%= will_paginate %>
 
-<ul class="users">
+<table class="table table-striped table-bordered table-hover">
+  <tr>
+    <th>Name</th>
+    <th>Email</th>
+    <th></th>
+    <% if admin? %>
+      <th></th>
+    <% end %>
+  </tr>
+
   <%=render @users %>
-</ul>
+
+</table>
 
 <%= will_paginate %>
+
+<% provide :leftNavButtonBody, 'Home' %>
+<% provide :leftNavButtonUrl, root_path %>

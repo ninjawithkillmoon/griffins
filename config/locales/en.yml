@@ -116,6 +116,7 @@ en:
       long: ! '%B %d, %Y'
       medium: ! '%B %Y'
       short: ! '%b %d'
+      year_only: ! '%Y'
     month_names:
     - 
     - January

@@ -3,11 +3,17 @@
 
 <div class="row">
   <div class="span6 offset3">
-    <%= form_for(@competition) do |f| %>
+    <%= form_for(@competition, html: {class: "form-horizontal well"}) do |f| %>
 
       <%=render 'fields', f: f %>
 
-      <%= f.submit "Create competition", class: "btn btn-large btn-primary" %>
+      <div class="form-actions">
+        <%= f.submit "Create Competition", class: "btn btn-large btn-primary btn-success" %>
+        <%= link_to 'Cancel', competitions_path, class: "btn btn-large" %>
+      </div>
     <% end %>
   </div>
 </div>
+
+<% provide :leftNavButtonBody, 'Competitions' %>
+<% provide :leftNavButtonUrl, competitions_path %>

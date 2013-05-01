@@ -1,9 +1,10 @@
 <tr>
   <td><%= link_to division.name, division %></td>
+  <td><%= division.season.nil? ? "" : l(division.season.date_start, format: :year_only) %></td>
   <td><%= division.season.nil? ? "" : link_to(division.season.name, division.season) %></td>
   <td><%= sex_string(division.sex) %></td>
   <% if admin? %>
-    <td><%= link_to 'Edit', edit_division_path(division), {class: "btn btn-warning"} %></td>
-    <td><%= link_to 'Delete', division, class: "btn btn-danger", method: :delete, data: { confirm: t(:confirm_division_delete, {id: division.id, name: division.name, sex: sex_string(division.sex)}) } %></td>
+    <td><%= link_to raw('<i class="icon-edit icon-white"></i> Edit'), edit_division_path(division), {class: "btn btn-warning"} %></td>
+    <td><%= link_to raw('<i class="icon-trash icon-white"></i> Delete'), division, class: "btn btn-danger", method: :delete, data: { confirm: t(:confirm_division_delete, {id: division.id, name: division.name, sex: sex_string(division.sex)}) } %></td>
   <% end %>
 </tr>
