@@ -6,3 +6,10 @@
     <%= f.text_field :name %>
   </div>
 </div>
+
+<div class="control-group">
+  <%= f.label :division_id, class: "control-label" %>
+  <div class="controls">
+    <%= f.select :division_id, Division.all.collect { |division| [division.name, division.id] }, {} %>
+  </div>
+</div>

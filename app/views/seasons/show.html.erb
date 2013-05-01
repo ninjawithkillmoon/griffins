@@ -9,7 +9,8 @@
       <%= dtdd 'Start Date', l(@season.date_start, format: :medium) %>
       <%= dtdd 'Cost', number_to_currency(@season.cost) %>
       <%= dtdd 'Student Cost', number_to_currency(@season.cost_student) %>
-      <%= dtdd 'Competition', (@season.competition.nil? ? "&nbsp;" : link_to(@season.competition.name, @season.competition)) %>
+      <%= dtdd 'Competition', (@season.competition.nil? ? raw("&nbsp;") : link_to(@season.competition.name, @season.competition)) %>
+
       <% unless @season.divisions.empty? %>
         <dt>
           Divisions
@@ -22,6 +23,7 @@
           </ul>
         </dd>
       <% end %>
+      
       <% if admin? %>
         <%= dtdd '', link_to('Edit', edit_season_path(@season), class: "btn btn-large btn-warning") %>
       <% end %>

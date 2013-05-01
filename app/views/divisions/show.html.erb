@@ -7,7 +7,21 @@
     <dl class="dl-horizontal">
       <%= dtdd 'Name', @division.name %>
       <%= dtdd 'Sex', sex_string(@division.sex) %>
-      <%= dtdd 'Season', (@division.season.nil? ? "&nbsp;" : link_to(@division.season.name, @division.season)) %>
+      <%= dtdd 'Season', (@division.season.nil? ? raw("&nbsp;") : link_to(@division.season.name, @division.season)) %>
+      
+      <% unless @division.teams.empty? %>
+        <dt>
+          Teams
+        </dt>
+        <dd>
+          <ul class="unstyled">
+            <% @division.teams.each do |team| %>
+              <li><%= link_to team.name, team_path(team) %></li>
+            <% end %>
+          </ul>
+        </dd>
+      <% end %>
+      
       <% if admin? %>
         <%= dtdd '', link_to('Edit', edit_division_path(@division), class: "btn btn-large btn-warning") %>
       <% end %>

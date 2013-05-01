@@ -7,13 +7,25 @@
     <dl class="dl-horizontal">
       <%= dtdd 'Name', @team.name %>
       <%= dtdd 'Sex', (@team.division.nil? ? raw("&nbsp;") : sex_string(@team.division.sex)) %>
+      <%= dtdd 'Division', (@team.division.nil? ? raw("&nbsp;") : link_to(@team.division.name, @team.division)) %>
+      
+      <% unless @team.players.empty? %>
+        <dt>
+          Players
+        </dt>
+        <dd>
+          <ul class="unstyled">
+            <% @team.players.each do |player| %>
+              <li><%= link_to full_name(player), player_path(player) %></li>
+            <% end %>
+          </ul>
+        </dd>
+      <% end %>
+      
       <% if admin? %>
         <%= dtdd '', link_to('Edit', edit_team_path(@team), class: "btn btn-large btn-warning") %>
       <% end %>
     </dl>
-
-
-    
   </div>
 </div>
 

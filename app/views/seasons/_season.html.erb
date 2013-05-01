@@ -1,5 +1,6 @@
 <tr>
   <td><%= link_to season.name, season %></td>
+  <td><%= season.competition.nil? ? "" : link_to(season.competition.name, season.competition) %></td>
   <td><%= l season.date_start, format: :medium %></td>
   <td><%= number_to_currency season.cost %></td>
   <td><%= number_to_currency season.cost_student %></td>
