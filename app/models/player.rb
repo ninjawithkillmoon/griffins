@@ -14,7 +14,7 @@
 #
 
 class Player < ActiveRecord::Base
-  attr_accessible :date_of_birth, :email, :sex, :name_family, :name_given, :student_number, :team_ids
+  attr_accessible :date_of_birth, :email, :sex, :name_family, :name_given, :student_number, :number, :team_ids
 
   has_and_belongs_to_many :teams
 

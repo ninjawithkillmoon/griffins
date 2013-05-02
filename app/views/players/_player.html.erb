@@ -2,9 +2,10 @@
   <td><%= link_to player.name_family, player %></td>
   <td><%= link_to player.name_given, player %></td>
   <td><%= sex_string(player.sex) %></td>
-  <td><%= player.student_number %></td>
-  <td><%= l(player.date_of_birth, format: :long) unless player.date_of_birth.nil? %></td>
   <td><%= mail_to(player.email, nil, encode: "javascript") %></td>
+  <td><%= player.student_number %></td>
+  <!--<td><%= l(player.date_of_birth, format: :long) unless player.date_of_birth.nil? %></td>-->
+  <td><%= player.number %></td>
   <% if admin? %>
     <td><%= link_to raw('<i class="icon-edit icon-white"></i> Edit'), edit_player_path(player), {class: "btn btn-warning"} %></td>
     <td><%= link_to raw('<i class="icon-trash icon-white"></i> Delete'), player, class: "btn btn-danger", method: :delete, data: { confirm: t(:confirm_player_delete, {id: player.id, name: player.name_given + " " + player.name_family, email: player.email}) } %></td>

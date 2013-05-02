@@ -56,7 +56,7 @@ module ApplicationHelper
   end
 
   def dtdd(p_dt, p_dd)
-    return render 'layouts/components/dt_dd', dt: p_dt, dd: p_dd
+    return render 'layouts/components/dt_dd', dt: (p_dt.blank? ? raw("&nbsp;") : p_dt), dd: (p_dd.blank? ? raw("&nbsp;") : p_dd)
   end
 
   def active_tab?(p_id)
