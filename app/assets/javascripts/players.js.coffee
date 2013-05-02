@@ -3,5 +3,7 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
 jQuery ->
-  jQuery("#division_season_id").select2()
-  jQuery("#division_sex").select2()
+  jQuery("#player_sex").select2()
+  jQuery("#player_date_of_birth_1i").select2()
+  jQuery("#player_date_of_birth_2i").select2()
+  jQuery("#player_date_of_birth_3i").select2()
