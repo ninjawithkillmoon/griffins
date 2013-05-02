@@ -13,7 +13,7 @@
 class Division < ActiveRecord::Base
   attr_accessible :name, :sex, :season_id
 
-  has_many :teams, dependent: :destroy
+  has_many :teams
   belongs_to :season
 
   validates(:name, {

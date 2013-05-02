@@ -31,6 +31,6 @@
 <div class="control-group">
   <%= f.label :competition_id, class: "control-label" %>
   <div class="controls">
-    <%= f.select :competition_id, Competition.all.collect { |comp| [comp.name, comp.id] }, {} %>
+    <%= f.select :competition_id, Competition.all.collect { |comp| [comp.name, comp.id] } %>
   </div>
 </div>

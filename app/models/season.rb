@@ -15,7 +15,7 @@
 class Season < ActiveRecord::Base
   attr_accessible :cost, :cost_student, :date_start, :name, :competition_id
 
-  has_many :divisions, dependent: :destroy
+  has_many :divisions
   belongs_to :competition
 
   validates(:name, {

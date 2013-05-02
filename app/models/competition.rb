@@ -9,9 +9,9 @@
 #
 
 class Competition < ActiveRecord::Base
-  attr_accessible :name
+  attr_accessible :name, :season_ids
 
-  has_many :seasons, dependent: :destroy
+  has_many :seasons
 
   validates(:name, {
       presence: true,

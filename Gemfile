@@ -9,6 +9,7 @@ gem 'bootstrap-sass'
 gem 'faker'
 gem 'will_paginate'
 gem 'bootstrap-will_paginate'
+gem 'select2-rails'
 
 group :development do
   gem 'sqlite3'
