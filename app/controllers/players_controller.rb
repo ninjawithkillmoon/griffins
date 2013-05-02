@@ -3,7 +3,7 @@ class PlayersController < ApplicationController
   before_filter :admin_user, only: [:new, :create, :edit, :update, :destroy]
 
   def index
-    @players = Player.paginate(page: params[:page])
+    @players = Player.order("name_family, name_given").paginate(page: params[:page])
   end
 
   def show
