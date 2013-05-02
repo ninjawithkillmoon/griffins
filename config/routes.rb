@@ -1,13 +1,12 @@
 NwkmGriffins::Application.routes.draw do
   resources :users
-  resources :players do
-    collection {post :import}
-  end
+  resources :players
   resources :teams
   resources :divisions
   resources :seasons
   resources :competitions
   resources :sessions, only: [:new, :create, :destroy]
+  resources :player_imports, only: [:new, :create]
 
   root to: 'static_pages#home'
   

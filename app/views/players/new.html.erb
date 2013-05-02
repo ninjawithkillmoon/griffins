@@ -19,7 +19,7 @@
           
           <%= form_for(@player, html: {class: "form-horizontal well"}) do |f| %>
 
-            <%=render 'fields', f: f %>
+            <%=render 'players/fields', f: f %>
 
             <div class="form-actions">
               <%= f.submit "Create Player", class: "btn btn-large btn-primary btn-success" %>
@@ -28,20 +28,39 @@
           <% end %>
         </div>
 
-        <div id="import" class="tab-pane <%= active_tab?("import") ? raw('active') : "" %>">
-          <%= form_tag import_players_path, multipart: true, class: "form-horizontal well" do %>
+        <div id="import" class="well tab-pane <%= active_tab?("import") ? raw('active') : "" %>">
+          
+          <%= render 'shared/error_messages', resource: @player_import %>
+
+          <p>A CSV or Excel file can be used to import records. The first row should be the column name. The following columns are allowed:</p>
+
+          <dl class="dl-horizontal">
+            <% Player.columns.each do |column| %>
+              <% if column.name.in? ["id", *Player.accessible_attributes] %>
+                <%= dtdd column.name, column.type.to_s.titleize %>
+              <% end %>
+            <% end %>
+          </dl>
+
+          <p>If an <strong>id</strong> is supplied it will update the matching record instead of creating a new one.</p>
+
+          <%= form_for(@player_import, html: {class: "form-horizontal"}) do |f| %>
+
             <div class="control-group">
-              <%= label_tag :file, "File", class: "control-label" %>
+              <%= f.label :file, "File", class: "control-label" %>
               <div class="controls">
-                <%= file_field_tag :file %>
+                <%= f.file_field :file %>
               </div>
             </div>
+
             <%= hidden_field_tag "active", "import" %>
+
             <div class="form-actions">
-              <%= submit_tag "Import Players", class: "btn btn-large btn-primary btn-success" %>
+              <%= f.submit "Import Players", class: "btn btn-large btn-primary btn-success" %>
               <%= link_to 'Cancel', players_path, class: "btn btn-large" %>
             </div>
           <% end %>
+
         </div>
       </div>
     </div>
