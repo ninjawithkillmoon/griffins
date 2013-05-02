@@ -4,3 +4,6 @@
 
 jQuery ->
   jQuery("#team_division_id").select2()
+  jQuery("#team_player_ids").select2(
+    placeholder: "No players selected"
+  )

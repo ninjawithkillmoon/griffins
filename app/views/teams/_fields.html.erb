@@ -13,3 +13,10 @@
     <%= f.select :division_id, Division.all.collect { |division| ["#{division.season.name} - #{division.name} (#{sex_string(division.sex)})", division.id] }, {}, {class: "fill"} %>
   </div>
 </div>
+
+<div class="control-group">
+  <%= f.label :player_ids, "Players", class: "control-label" %>
+  <div class="controls">
+    <%= f.select :player_ids, Player.all.collect { |player| [full_name(player), player.id] }, {include_blank: true}, {multiple: true, class: "fill"} %>
+  </div>
+</div>

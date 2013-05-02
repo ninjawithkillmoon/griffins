@@ -13,7 +13,7 @@
 #
 
 class Season < ActiveRecord::Base
-  attr_accessible :cost, :cost_student, :date_start, :name, :competition_id
+  attr_accessible :cost, :cost_student, :date_start, :name, :competition_id, :division_ids
 
   has_many :divisions
   belongs_to :competition

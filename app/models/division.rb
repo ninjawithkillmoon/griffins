@@ -11,7 +11,7 @@
 #
 
 class Division < ActiveRecord::Base
-  attr_accessible :name, :sex, :season_id
+  attr_accessible :name, :sex, :season_id, :team_ids
 
   has_many :teams
   belongs_to :season

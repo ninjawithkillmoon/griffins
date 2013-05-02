@@ -9,7 +9,7 @@
       <%= dtdd 'Sex', sex_string(@player.sex) %>
       <%= dtdd 'Student ID', (@player.student_number.blank? ? raw('&nbsp;') : @player.student_number) %>
       <%= dtdd 'Date of Birth', (@player.date_of_birth.blank? ? raw('&nbsp;') : "#{l(@player.date_of_birth, format: :long)} (#{age(@player.date_of_birth)})") %>
-      <%= dtdd 'Email', @player.email %>
+      <%= dtdd 'Email', mail_to(@player.email, nil, encode: "javascript") %>
       <% if admin? %>
         <%= dtdd '', link_to('Edit', edit_player_path(@player), class: "btn btn-large btn-warning") %>
       <% end %>
