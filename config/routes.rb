@@ -1,6 +1,8 @@
 NwkmGriffins::Application.routes.draw do
   resources :users
-  resources :players
+  resources :players do
+    collection {post :import}
+  end
   resources :teams
   resources :divisions
   resources :seasons

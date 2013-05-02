@@ -1,18 +1,52 @@
 <% provide(:title, 'New Player') %>
 <h1><%=yield(:title) %></h1>
 
-<div class="row">
-  <div class="span6 offset3">
-    <%= form_for(@player, html: {class: "form-horizontal well"}) do |f| %>
+<div class="tabbable">
 
-      <%=render 'fields', f: f %>
+  <ul class="nav nav-tabs">
+    <li <%= active_tab_default?("create") ? raw('class="active"') : "" %>>
+      <a href="#create" data-toggle="tab">Create Player</a>
+    </li>
+    <li <%= active_tab?("import") ? raw('class="active"') : "" %>>
+      <a href="#import" data-toggle="tab">Import Players</a>
+    </li>
+  </ul>
 
-      <div class="form-actions">
-        <%= f.submit "Create Player", class: "btn btn-large btn-primary btn-success" %>
-        <%= link_to 'Cancel', players_path, class: "btn btn-large" %>
+  <div class="row">
+    <div class="span6 offset3">
+      <div class="tab-content">
+        <div id="create" class="tab-pane <%= active_tab_default?("create") ? raw('active') : "" %>">
+          
+          <%= form_for(@player, html: {class: "form-horizontal well"}) do |f| %>
+
+            <%=render 'fields', f: f %>
+
+            <div class="form-actions">
+              <%= f.submit "Create Player", class: "btn btn-large btn-primary btn-success" %>
+              <%= link_to 'Cancel', players_path, class: "btn btn-large" %>
+            </div>
+          <% end %>
+        </div>
+
+        <div id="import" class="tab-pane <%= active_tab?("import") ? raw('active') : "" %>">
+          <%= form_tag import_players_path, multipart: true, class: "form-horizontal well" do %>
+            <div class="control-group">
+              <%= label_tag :file, "File", class: "control-label" %>
+              <div class="controls">
+                <%= file_field_tag :file %>
+              </div>
+            </div>
+            <%= hidden_field_tag "active", "import" %>
+            <div class="form-actions">
+              <%= submit_tag "Import Players", class: "btn btn-large btn-primary btn-success" %>
+              <%= link_to 'Cancel', players_path, class: "btn btn-large" %>
+            </div>
+          <% end %>
+        </div>
       </div>
-    <% end %>
+    </div>
   </div>
+
 </div>
 
 <% provide :leftNavButtonBody, 'Players' %>

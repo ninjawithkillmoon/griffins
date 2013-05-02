@@ -31,6 +31,7 @@ en:
   player_created: Player created
   player_updated: Player updated
   player_deleted: Player deleted
+  player_imported: Player(s) imported
   confirm_player_delete: |+
     Are you sure you want to delete the following player:
 

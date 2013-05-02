@@ -10,6 +10,7 @@ gem 'faker'
 gem 'will_paginate'
 gem 'bootstrap-will_paginate'
 gem 'select2-rails'
+gem 'roo'
 
 group :development do
   gem 'sqlite3'

@@ -14,6 +14,13 @@ class PlayersController < ApplicationController
     @player = Player.new
   end
 
+  def import
+    Player.import(params[:file])
+
+    flash[:success] = t(:player_imported)
+    redirect_to players_path
+  end
+
   def create
     @player = Player.new(params[:player])
 

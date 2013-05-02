@@ -58,4 +58,23 @@ module ApplicationHelper
   def dtdd(p_dt, p_dd)
     return render 'layouts/components/dt_dd', dt: p_dt, dd: p_dd
   end
+
+  def active_tab?(p_id)
+    unless params.nil?
+      if params[:active] == p_id
+        return true
+      end
+    end
+
+    return false
+  end
+
+  def active_tab_default?(p_id)
+    if params[:active].nil?
+      return true
+    else
+      return active_tab?(p_id)
+    end
+  end
+
 end

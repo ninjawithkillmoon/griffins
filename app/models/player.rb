@@ -43,4 +43,11 @@ class Player < ActiveRecord::Base
       format: {with: VALID_SEX_REGEX_PLAYER}
     }
   )
+
+  def self.import(p_file)
+    CSV.foreach(p_file.path, headers: true) do |row|
+      Player.create! row.to_hash
+    end
+  end
+
 end
