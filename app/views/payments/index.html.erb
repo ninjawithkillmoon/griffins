@@ -1,0 +1,33 @@
+<% provide(:title, 'All Payments') %>
+<h1><%=yield(:title) %></h1>
+
+<%= will_paginate %>
+
+<table class="table table-striped table-bordered table-hover">
+  <tr>
+    <th>Code</th>
+    <th>Invoice</th>
+    <th>Player</th>
+    <th>Amount</th>
+    <th>Method</th>
+    <th>Notes</th>
+    <% if admin? %>
+      <th></th>
+      <th></th>
+    <% end %>
+  </tr>
+
+  <%=render @payments %>
+
+</table>
+
+<br />
+
+<% if admin? %>
+  <%= link_to raw('<i class="icon-plus icon-white"></i> New Payment'), new_payment_path, class: "btn btn-large btn-primary" %>
+<% end %>
+
+<% provide :leftNavButtonBody, 'Invoices' %>
+<% provide :leftNavButtonUrl, invoices_path %>
+
+<%= will_paginate %>

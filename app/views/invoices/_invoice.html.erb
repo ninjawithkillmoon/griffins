@@ -1,5 +1,5 @@
-<tr>
-  <td><%= link_to invoice.id, invoice %></td>
+<tr class="<%= invoice_row_class(invoice) %>">
+  <td><%= link_to invoice_code(invoice), invoice %></td>
   <td><%= link_to full_name(invoice.player), invoice.player %></td>
   <td><%= invoice.season.nil? ? "" : link_to(invoice.season.name, invoice.season) %></td>
   <td><%= number_to_currency invoice.amount %></td>
@@ -7,7 +7,14 @@
   <td><%= truncate invoice.notes %></td>
 
   <% if admin? %>
-    <td><%= link_to raw('<i class="icon-edit icon-white"></i> Edit'), edit_invoice_path(invoice), {class: "btn btn-warning"} %></td>
-    <td><%= link_to raw('<i class="icon-trash icon-white"></i> Delete'), invoice, class: "btn btn-danger", method: :delete, data: { confirm: t(:confirm_invoice_delete, {id: invoice.id, player_name: full_name(invoice.player)}) } %></td>
+    <td>
+      <%= link_to raw('<i class="icon-edit icon-white"></i> Pay'), new_payment_path('payment[invoice_id]' => invoice.id), {class: "btn btn-primary"} %>
+    </td>
+    <td>
+      <%= link_to raw('<i class="icon-edit icon-white"></i> Edit'), edit_invoice_path(invoice), {class: "btn btn-warning"} %>
+    </td>
+    <td>
+      <%= link_to raw('<i class="icon-trash icon-white"></i> Delete'), invoice, class: "btn btn-danger", method: :delete, data: { confirm: t(:confirm_invoice_delete, {id: invoice.id, player_name: full_name(invoice.player)}) } %>
+    </td>
   <% end %>
 </tr>

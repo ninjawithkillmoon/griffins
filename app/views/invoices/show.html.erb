@@ -1,11 +1,11 @@
-<% provide(:title, invoice_name(@invoice)) %>
+<% provide(:title, invoice_code(@invoice)) %>
 <h1>
   <%= yield :title %>
 </h1>
 <div class="row">
   <div class="span6 offset3">
     <dl class="dl-horizontal">
-      <%= dtdd 'Invoice', invoice_name(@invoice) %>
+      <%= dtdd 'Code', invoice_code(@invoice) %>
       <%= dtdd 'Player', (@invoice.player.nil? ? raw("&nbsp;") : link_to(full_name(@invoice.player), @invoice.player)) %>
       <%= dtdd 'Season', (@invoice.season.nil? ? raw("&nbsp;") : link_to(@invoice.season.name, @invoice.season)) %>
       <%= dtdd 'Amount', number_to_currency(@invoice.amount) %>
@@ -21,14 +21,14 @@
         <dd>
           <ul class="unstyled">
             <% @invoice.payments.each do |payment| %>
-              <li><%= link_to "#{payment_name(payment)}", payment_path(payment) %></li>
+              <li><%= link_to "#{payment_code(payment)}", payment_path(payment) %></li>
             <% end %>
           </ul>
         </dd>
       <% end %>
       
       <% if admin? %>
-        <%= dtdd '', link_to('Edit', edit_invoice_path(@invoice), class: "btn btn-large btn-warning") %>
+        <%= dtdd '', link_to('Edit', edit_invoice_path(@invoice), class: "btn btn-large btn-warning") + " " + link_to('Process Payment', new_payment_path('payment[invoice_id]' => @invoice.id), class: "btn btn-large btn-primary") %>
       <% end %>
     </dl>
   </div>

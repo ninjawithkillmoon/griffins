@@ -7,13 +7,13 @@ class InvoicesController < ApplicationController
   add_breadcrumb "Invoices", :invoices_path
 
   def index
-    @invoices = Invoice.order("updated_at").paginate(page: params[:page])
+    fetch_invoices
   end
 
   def show
     fetch_invoice
 
-    add_breadcrumb invoice_name(@invoice), @invoice
+    add_breadcrumb invoice_code(@invoice), @invoice
   end
 
   def new
@@ -38,7 +38,7 @@ class InvoicesController < ApplicationController
   def edit
     fetch_invoice
 
-    add_breadcrumb invoice_name(@invoice), @invoice
+    add_breadcrumb invoice_code(@invoice), @invoice
     add_breadcrumb "Edit", edit_invoice_path(@invoice)
   end
 
@@ -57,15 +57,25 @@ class InvoicesController < ApplicationController
   end
 
   def destroy
-    fetch_player.destroy
+    fetch_invoice
 
-    flash[:success] = t(:invoice_deleted)
-    redirect_to invoices_path
+    begin
+      @invoice.destroy
+      flash[:success] = t(:invoice_deleted)
+    rescue
+      flash[:error] = "Error: Cannot delete invoice with existing payments. Please remove payments separately or contact an administrator"
+    ensure
+      redirect_to invoices_path
+    end
   end
 
   private # ----------------------------------------------------------
 
   def fetch_invoice
     @invoice = Invoice.find(params[:id])
+  end
+
+  def fetch_invoices
+    @invoices = Invoice.order("updated_at").paginate(page: params[:page])
   end
 end

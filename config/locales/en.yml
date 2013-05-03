@@ -96,7 +96,7 @@ en:
   payment_updated: Payment updated
   payment_deleted: Payment deleted
   confirm_payment_delete: |+
-    Are you sure you want to delete the following invoice:
+    Are you sure you want to delete the following payment:
 
     ID %{id}
     %{player_name}

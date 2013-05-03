@@ -11,6 +11,7 @@
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
 #  sex            :integer
+#  number         :integer
 #
 
 class Player < ActiveRecord::Base
@@ -19,7 +20,7 @@ class Player < ActiveRecord::Base
   has_and_belongs_to_many :teams
   has_many :invoices
 
-  before_save{ |player| player.email = email.downcase }
+  before_save { |player| player.email = email.downcase }
 
   validates(:name_family, {
       presence: true,

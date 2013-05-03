@@ -1,5 +1,5 @@
 class PaymentsController < ApplicationController
-  include PaymentsHelper
+  include PaymentsHelper, PlayersHelper, InvoicesHelper
 
   before_filter :signed_in_user
   before_filter :admin_user, only: [:new, :create, :edit, :update, :destroy]
@@ -7,17 +7,17 @@ class PaymentsController < ApplicationController
   add_breadcrumb "Payments", :payments_path
 
   def index
-    @payment = Payment.order("modified_at").paginate(page: params[:page])
+    @payments = Payment.order("updated_at").paginate(page: params[:page])
   end
 
   def show
     fetch_payment
 
-    add_breadcrumb payment_name(@payment), @payment
+    add_breadcrumb payment_code(@payment), @payment
   end
 
   def new
-    @payment = Payment.new
+    @payment = Payment.new(params[:payment])
 
     add_breadcrumb "New", new_payment_path
   end
@@ -38,14 +38,14 @@ class PaymentsController < ApplicationController
   def edit
     fetch_payment
 
-    add_breadcrumb payment_name(@payment), @payment
+    add_breadcrumb payment_code(@payment), @payment
     add_breadcrumb "Edit", edit_payment_path(@payment)
   end
 
   def update
     fetch_payment
 
-    add_breadcrumb payment_name(@payment), @payment
+    add_breadcrumb payment_code(@payment), @payment
     add_breadcrumb "Edit", edit_payment_path(@payment)
 
     if @payment.update_attributes(params[:payment])
@@ -57,7 +57,7 @@ class PaymentsController < ApplicationController
   end
 
   def destroy
-    fetch_player.destroy
+    fetch_payment.destroy
 
     flash[:success] = t(:payment_deleted)
     redirect_to payments_path

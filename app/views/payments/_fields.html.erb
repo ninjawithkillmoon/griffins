@@ -1,0 +1,29 @@
+<%= render 'shared/error_messages', resource: @payment %>
+
+<div class="control-group">
+  <%= f.label :invoice_id, "Invoice", class: "control-label" %>
+  <div class="controls">
+    <%= f.select :invoice_id, Invoice.all.collect { |invoice| [invoice_code(invoice), invoice.id] }, {}, {class: "fill"} %>
+  </div>
+</div>
+
+<div class="control-group">
+  <%= f.label :amount, "Amount", class: "control-label" %>
+  <div class="controls">
+    <%= f.number_field :amount, {step: 0.01, min: 0.00} %>
+  </div>
+</div>
+
+<div class="control-group">
+  <%= f.label :method, class: "control-label" %>
+  <div class="controls">
+    <%= f.select :method, {payment_type(METHOD_TRANSFER) => METHOD_TRANSFER, payment_type(METHOD_CASH) => METHOD_CASH, payment_type(METHOD_CHEQUE) => METHOD_CHEQUE, payment_type(METHOD_CREDIT) => METHOD_CREDIT}, {}, {class: "fill"} %>
+  </div>
+</div>
+
+<div class="control-group">
+  <%= f.label :notes, "Notes", class: "control-label" %>
+  <div class="controls">
+    <%= f.text_area :notes, rows: 5 %>
+  </div>
+</div>
