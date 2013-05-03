@@ -5,7 +5,7 @@ gem 'jquery-rails'
 gem 'bcrypt-ruby'
 gem 'rails_config'
 gem 'formatted_rails_logger'
-gem 'bootstrap-sass'
+gem 'twitter-bootstrap-rails'
 gem 'faker'
 gem 'will_paginate'
 gem 'bootstrap-will_paginate'
@@ -24,7 +24,6 @@ end
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
-  gem 'sass-rails'
   gem 'coffee-rails'
   gem 'uglifier'
 end

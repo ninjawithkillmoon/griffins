@@ -1,10 +1,6 @@
-@import "bootstrap";
-
 /* mixins, variables, etc. */
 
-$grayMediumLight: #eaeaea;
-
-@mixin box_sizing {
+.box_sizing {
   -moz-box-sizing: border-box; 
   -webkit-box-sizing: border-box; 
   box-sizing: border-box;
@@ -51,6 +47,16 @@ dd .btn {
   margin-top: 5px;
 }
 
+/* fix for weird background showing up on icons in nav menu when hovering */
+.nav > .active > a > [class^="icon-"],
+.nav > .active > a > [class*=" icon-"],
+.dropdown-menu > li > a:hover > [class^="icon-"],
+.dropdown-menu > li > a:hover > [class*=" icon-"],
+.dropdown-menu > .active > a > [class^="icon-"],
+.dropdown-menu > .active > a > [class*=" icon-"] {
+  background: none;
+}
+
 /* typography */
 
 h1, h2, h3, h4, h5, h6 {
@@ -70,7 +76,7 @@ h2 {
   margin-bottom: 30px;
   text-align: center;
   font-weight: normal;
-  color: $grayLight;
+  color: #999;
 }
 
 p {
@@ -91,7 +97,7 @@ p {
   font-weight: bold;
   line-height: 1;
   &:hover {
-    color: $grayLight;
+    color: #999;
     text-decoration: none;
   }
 }
@@ -106,7 +112,7 @@ footer {
   margin-top: 10px;
   padding-top: 5px;
   border-top: 1px solid #eaeaea;
-  color: $grayLight;
+  color: #999;
   a {
     color: #555;
     &:hover { 
@@ -131,7 +137,7 @@ footer {
 aside {
   section {
     padding: 10px 0;
-    border-top: 1px solid $grayLighter;
+    border-top: 1px solid #eee;
     &:first-child {
       border: 0;
       padding-top: 0;
@@ -158,7 +164,7 @@ aside {
   float: left;
   width: 100%;
   margin-top: 45px;
-  @include box_sizing;
+  .box_sizing;
 }
 
 /* forms */
@@ -182,10 +188,6 @@ input {
   }
 }
 
-.field_with_errors {
-  @extend .control-group.error
-}
-
 .nwkm_dateSelector {
   width: 30%;
 }
@@ -202,9 +204,9 @@ input {
   li {
     overflow: auto;
     padding: 10px 0;
-    border-top: 1px solid $grayLighter;
+    border-top: 1px solid #eee;
     &:last-child {
-      border-bottom: 1px solid $grayLighter;
+      border-bottom: 1px solid #eee;
     }
   }
 }
