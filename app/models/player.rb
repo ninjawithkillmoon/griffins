@@ -34,7 +34,8 @@ class Player < ActiveRecord::Base
 
   validates(:email, {
       format: {with: VALID_EMAIL_REGEX},
-      uniqueness: {case_sensitive: false}
+      uniqueness: {case_sensitive: false},
+      allow_blank: true
     }
   )
 

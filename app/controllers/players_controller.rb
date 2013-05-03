@@ -1,4 +1,6 @@
 class PlayersController < ApplicationController
+  include PlayersHelper
+
   before_filter :signed_in_user
   before_filter :admin_user, only: [:new, :create, :edit, :update, :destroy]
 
@@ -11,7 +13,7 @@ class PlayersController < ApplicationController
   def show
     fetch_player
 
-    add_breadcrumb @player.name, @player
+    add_breadcrumb full_name(@player), @player
   end
 
   def new
@@ -60,7 +62,7 @@ class PlayersController < ApplicationController
     fetch_player.destroy
 
     flash[:success] = t(:player_deleted)
-    redirect_to players_url
+    redirect_to players_path
   end
 
   private # ----------------------------------------------------------
