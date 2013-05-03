@@ -6,7 +6,10 @@
       
       <%=render 'fields', f: f %>
 
-      <%= f.submit "Create my account", class: "btn btn-large btn-primary" %>
+      <%= button_tag(type: :submit, class: "btn btn-large btn-success") do %>
+        <i class='icon-ok'></i> Create My Account
+      <% end %>
+      <%= link_to raw("<i class='icon-remove'></i> Cancel"), root_path, class: "btn btn-large" %>
     <% end %>
   </div>
 </div>

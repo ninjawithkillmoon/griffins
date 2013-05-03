@@ -21,7 +21,7 @@
 
 </table>
 
-<br />
+<%= will_paginate %>
 
 <% if admin? %>
   <%= link_to raw('<i class="icon-plus icon-white"></i> New Invoice'), new_invoice_path, class: "btn btn-large btn-primary" %>
@@ -32,5 +32,3 @@
 
 <% provide :rightNavButtonBody, 'Payments' %>
 <% provide :rightNavButtonUrl, payments_path %>
-
-<%= will_paginate %>

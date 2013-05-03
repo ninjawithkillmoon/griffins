@@ -19,7 +19,7 @@
 
 </table>
 
-<br />
+<%= will_paginate %>
 
 <% if admin? %>
   <%= link_to raw('<i class="icon-plus icon-white"></i> New Season'), new_season_path, class: "btn btn-large btn-primary" %>
@@ -30,5 +30,3 @@
 
 <% provide :rightNavButtonBody, 'Divisions' %>
 <% provide :rightNavButtonUrl, divisions_path %>
-
-<%= will_paginate %>

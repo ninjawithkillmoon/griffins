@@ -23,7 +23,7 @@
       <% end %>
       
       <% if admin? %>
-        <%= dtdd '', link_to('Edit', edit_season_path(@season), class: "btn btn-large btn-warning") %>
+        <%= dtdd '', link_to(raw("<i class='icon-edit'></i> Edit"), edit_season_path(@season), class: "btn btn-large btn-warning") %>
       <% end %>
     </dl>
   </div>

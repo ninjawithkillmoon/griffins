@@ -7,8 +7,10 @@
       <%=render 'fields', f: f %>
 
       <div class="form-actions">
-        <%= f.submit "Create Payment", class: "btn btn-large btn-primary btn-success" %>
-        <%= link_to 'Cancel', payments_path, class: "btn btn-large" %>
+        <%= button_tag(type: :submit, class: "btn btn-large btn-success") do %>
+          <i class='icon-ok'></i> Create Payment
+        <% end %>
+        <%= link_to raw("<i class='icon-remove'></i> Cancel"), payments_path, class: "btn btn-large" %>
       </div>
     <% end %>
   </div>

@@ -21,14 +21,14 @@
 
 </table>
 
-<br />
+<%= will_paginate %>
 
-<% if admin? %>
-  <%= link_to raw('<i class="icon-plus icon-white"></i> New Player'), new_player_path, class: "btn btn-large btn-primary" %>
-  <%= link_to raw('<i class="icon-upload icon-white"></i> Import Players'), new_player_path(active: "import"), class: "btn btn-large btn-primary" %>
-<% end %>
+<div class="nwkm_actions">
+  <% if admin? %>
+    <%= link_to raw('<i class="icon-plus icon-white"></i> New Player'), new_player_path, class: "btn btn-large btn-primary" %>
+    <%= link_to raw('<i class="icon-upload icon-white"></i> Import Players'), new_player_path(active: "import"), class: "btn btn-large btn-primary" %>
+  <% end %>
+</div>
 
 <% provide :leftNavButtonBody, 'Teams' %>
 <% provide :leftNavButtonUrl, teams_path %>
-
-<%= will_paginate %>

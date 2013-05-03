@@ -8,8 +8,10 @@
       <%=render 'fields', f: f %>
 
       <div class="form-actions">
-        <%= f.submit "Save changes", class: "btn btn-large btn-primary" %>
-        <%= link_to 'Cancel', @user, class: "btn btn-large" %>
+        <%= button_tag(type: :submit, class: "btn btn-large btn-success") do %>
+          <i class='icon-ok'></i> Save changes
+        <% end %>
+        <%= link_to raw("<i class='icon-remove'></i> Cancel"), @user, class: "btn btn-large" %>
       </div>
     <% end %>
   </div>

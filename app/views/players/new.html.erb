@@ -21,8 +21,10 @@
             <%=render 'players/fields', f: f %>
 
             <div class="form-actions">
-              <%= f.submit "Create Player", class: "btn btn-large btn-primary btn-success" %>
-              <%= link_to 'Cancel', players_path, class: "btn btn-large" %>
+              <%= button_tag(type: :submit, class: "btn btn-large btn-success") do %>
+                <i class='icon-ok'></i> Create Player
+              <% end %>
+              <%= link_to raw("<i class='icon-remove'></i> Cancel"), players_path, class: "btn btn-large" %>
             </div>
           <% end %>
         </div>
@@ -55,8 +57,10 @@
             <%= hidden_field_tag "active", "import" %>
 
             <div class="form-actions">
-              <%= f.submit "Import Players", class: "btn btn-large btn-primary btn-success" %>
-              <%= link_to 'Cancel', players_path, class: "btn btn-large" %>
+              <%= button_tag(type: :submit, class: "btn btn-large btn-success") do %>
+                <i class='icon-ok'></i> Import Players
+              <% end %>
+              <%= link_to raw("<i class='icon-remove'></i> Cancel"), players_path, class: "btn btn-large" %>
             </div>
           <% end %>
 
