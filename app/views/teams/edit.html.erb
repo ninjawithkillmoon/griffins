@@ -1,10 +1,5 @@
-<% provide(:title, "Edit Team") %> 
-<h1>
-  <%=@team.name %>
-  <small>
-    Edit
-  </small>
-</h1>
+<% provide(:title, @team.name) %>
+<% provide(:titleSmall, "Edit") %>
 
 <div class="row">
   <div class="span6 offset3">

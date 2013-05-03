@@ -1,10 +1,5 @@
-<% provide(:title, "Edit Invoice") %> 
-<h1>
-  <%=invoice_code(@invoice) %>
-  <small>
-    Edit
-  </small>
-</h1>
+<% provide(:title, invoice_code(@invoice)) %>
+<% provide(:titleSmall, "Edit") %>
 
 <div class="row">
   <div class="span6 offset3">

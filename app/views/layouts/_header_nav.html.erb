@@ -1,6 +1,6 @@
-<div class="container nwkm_navButtons nwkm_navButtonsFooter">
+<div class="container nwkm_navButtons nwkm_navButtonsHeader">
   <div class="row">
-    <div class="span4">
+    <div class="span2">
       <% if content_for? :leftNav %>
         <%= yield :leftNav %>
       <% elsif content_for?(:leftNavButtonBody) && content_for?(:leftNavButtonUrl) %>
@@ -10,17 +10,22 @@
       <% end %>
     </div>
 
-    <div class="span2 offset1">
-      <% if content_for? :centerNav %>
-        <%= yield :centerNav %>
-      <% elsif content_for?(:centerNavButtonBody) && content_for?(:centerNavButtonUrl) %>
-        <%= link_to(raw("#{yield(:centerNavButtonBody)}"), yield(:centerNavButtonUrl), class: "btn btn-large") %>
+    <div class="span8">
+      <% if content_for? :title %>
+        <h1>
+          <%= yield :title %>
+          <% if content_for? :titleSmall %>
+            <small>
+              <%= yield :titleSmall %>
+            </small>
+          <% end %>
+        </h1>
       <% else %>
         &nbsp;
       <% end %>
     </div>
 
-    <div class="span4 offset1">
+    <div class="span2">
       <% if content_for? :rightNav %>
         <%= yield :rightNav %>
       <% elsif content_for?(:rightNavButtonBody) && content_for?(:rightNavButtonUrl) %>

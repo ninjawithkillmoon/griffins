@@ -1,10 +1,5 @@
-<% provide(:title, "Edit Competition") %> 
-<h1>
-  <%=@competition.name %>
-  <small>
-    Edit
-  </small>
-</h1>
+<% provide(:title, @competition.name) %> 
+<% provide(:titleSmall, "Edit") %>
 
 <div class="row">
   <div class="span6 offset3">

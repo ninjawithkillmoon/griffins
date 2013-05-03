@@ -45,7 +45,7 @@ class InvoicesController < ApplicationController
   def update
     fetch_invoice
 
-    add_breadcrumb invoice_name(@invoice), @invoice
+    add_breadcrumb invoice_code(@invoice), @invoice
     add_breadcrumb "Edit", edit_invoice_path(@invoice)
 
     if @invoice.update_attributes(params[:invoice])

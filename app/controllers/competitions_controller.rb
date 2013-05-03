@@ -36,14 +36,14 @@ class CompetitionsController < ApplicationController
   def edit
     fetch_competition
 
-    add_breadcrumb @competitions.name, @competition
+    add_breadcrumb @competition.name, @competition
     add_breadcrumb "Edit", edit_competition_path(@competition)
   end
 
   def update
     fetch_competition
 
-    add_breadcrumb @competitions.name, @competition
+    add_breadcrumb @competition.name, @competition
     add_breadcrumb "Edit", edit_competition_path(@competition)
 
     if @competition.update_attributes(params[:competition])

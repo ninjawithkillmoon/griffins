@@ -1,10 +1,5 @@
-<% provide(:title, "Edit Player") %> 
-<h1>
-  <%=full_name(@player) %>
-  <small>
-    Edit
-  </small>
-</h1>
+<% provide(:title, full_name(@player)) %>
+<% provide(:titleSmall, "Edit") %>
 
 <div class="row">
   <div class="span6 offset3">
