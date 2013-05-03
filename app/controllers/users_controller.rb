@@ -5,8 +5,12 @@ class UsersController < ApplicationController
   before_filter :user_is_not_current, only: [:destroy]
   before_filter :admin_user,          only: [:destroy]
 
+  add_breadcrumb "Users", :users_path, only: [:index, :show, :edit, :update, :destroy]
+
   def show
     fetch_user
+
+    add_breadcrumb @user.name, @user
   end
 
   def index
@@ -15,10 +19,14 @@ class UsersController < ApplicationController
 
   def new
     @user = User.new
+
+    add_breadcrumb "Sign Up", new_user_path
   end
 
   def create
     @user = User.new(params[:user])
+
+    add_breadcrumb "Sign Up", new_user_path
 
     if @user.save
       sign_in @user
@@ -30,10 +38,18 @@ class UsersController < ApplicationController
   end
 
   def edit
-    
+    fetch_user
+
+    add_breadcrumb @user.name, @user
+    add_breadcrumb "Edit", edit_user_path(@user)
   end
 
   def update
+    fetch_user
+
+    add_breadcrumb @user.name, @user
+    add_breadcrumb "Edit", edit_user_path(@user)
+
     if @user.update_attributes(params[:user])
       flash[:success] = t(:profile_updated)
       sign_in @user

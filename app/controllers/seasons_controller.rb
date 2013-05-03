@@ -2,20 +2,28 @@ class SeasonsController < ApplicationController
   before_filter :signed_in_user
   before_filter :admin_user, only: [:new, :create, :edit, :update, :destroy]
 
+  add_breadcrumb "Seasons", :seasons_path
+
   def index
     @seasons = Season.paginate(page: params[:page])
   end
 
   def show
     fetch_season
+
+    add_breadcrumb @season.name, @season
   end
 
   def new
     @season = Season.new
+
+    add_breadcrumb "New", new_season_path
   end
 
   def create
     @season = Season.new(params[:season])
+
+    add_breadcrumb "New", new_season_path
 
     if @season.save
       flash[:success] = t(:season_created)
@@ -27,10 +35,16 @@ class SeasonsController < ApplicationController
 
   def edit
     fetch_season
+
+    add_breadcrumb @season.name, @season
+    add_breadcrumb "Edit", edit_season_path(@season)
   end
 
   def update
     fetch_season
+
+    add_breadcrumb @season.name, @season
+    add_breadcrumb "Edit", edit_season_path(@season)
 
     if @season.update_attributes(params[:season])
       flash[:success] = t(:season_updated)

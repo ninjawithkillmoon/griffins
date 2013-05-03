@@ -4,8 +4,10 @@ class StaticPagesController < ApplicationController
   end
 
   def about
+    add_breadcrumb "About", about_path
   end
 
   def contact
+    add_breadcrumb "Contact", contact_path
   end
 end

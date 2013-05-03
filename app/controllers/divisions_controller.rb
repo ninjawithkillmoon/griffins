@@ -2,20 +2,28 @@ class DivisionsController < ApplicationController
   before_filter :signed_in_user
   before_filter :admin_user, only: [:new, :create, :edit, :update, :destroy]
 
+  add_breadcrumb "Divisions", :divisions_path
+
   def index
     @divisions = Division.paginate(page: params[:page])
   end
 
   def show
     fetch_division
+
+    add_breadcrumb @division.name, @division
   end
 
   def new
     @division = Division.new
+
+    add_breadcrumb "New", new_division_path
   end
 
   def create
     @division = Division.new(params[:division])
+
+    add_breadcrumb "New", new_division_path
 
     if @division.save
       flash[:success] = t(:division_created)
@@ -27,10 +35,16 @@ class DivisionsController < ApplicationController
 
   def edit
     fetch_division
+
+    add_breadcrumb @division.name, @division
+    add_breadcrumb "Edit", edit_division_path(@division)
   end
 
   def update
     fetch_division
+
+    add_breadcrumb @division.name, @division
+    add_breadcrumb "Edit", edit_division_path(@division)
 
     if @division.update_attributes(params[:division])
       flash[:success] = t(:division_updated)
