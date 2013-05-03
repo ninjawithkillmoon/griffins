@@ -1,0 +1,38 @@
+<% provide(:title, invoice_name(@invoice)) %>
+<h1>
+  <%= yield :title %>
+</h1>
+<div class="row">
+  <div class="span6 offset3">
+    <dl class="dl-horizontal">
+      <%= dtdd 'Invoice', invoice_name(@invoice) %>
+      <%= dtdd 'Player', (@invoice.player.nil? ? raw("&nbsp;") : link_to(full_name(@invoice.player), @invoice.player)) %>
+      <%= dtdd 'Season', (@invoice.season.nil? ? raw("&nbsp;") : link_to(@invoice.season.name, @invoice.season)) %>
+      <%= dtdd 'Amount', number_to_currency(@invoice.amount) %>
+      <%= dtdd 'Outstanding', number_to_currency(@invoice.outstanding) %>
+      <%= dtdd 'Created At', l(@invoice.created_at.in_time_zone(LOCAL_TIMEZONE), format: :long) %>
+      <%= dtdd 'Updated At', l(@invoice.updated_at.in_time_zone(LOCAL_TIMEZONE), format: :long) %>
+      <%= dtdd 'Notes', @invoice.notes %>
+
+      <% unless @invoice.payments.empty? %>
+        <dt>
+          Payments
+        </dt>
+        <dd>
+          <ul class="unstyled">
+            <% @invoice.payments.each do |payment| %>
+              <li><%= link_to "#{payment_name(payment)}", payment_path(payment) %></li>
+            <% end %>
+          </ul>
+        </dd>
+      <% end %>
+      
+      <% if admin? %>
+        <%= dtdd '', link_to('Edit', edit_invoice_path(@invoice), class: "btn btn-large btn-warning") %>
+      <% end %>
+    </dl>
+  </div>
+</div>
+
+<% provide :leftNavButtonBody, 'Invoices' %>
+<% provide :leftNavButtonUrl, invoices_path %>

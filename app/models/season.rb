@@ -16,6 +16,7 @@ class Season < ActiveRecord::Base
   attr_accessible :cost, :cost_student, :date_start, :name, :competition_id, :division_ids
 
   has_many :divisions
+  has_many :invoices
   belongs_to :competition
 
   validates(:name, {

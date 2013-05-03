@@ -81,6 +81,26 @@ en:
     ID %{id}
     %{name}
 
+  # INVOICES
+  invoice_created: Invoice created
+  invoice_updated: Invoice updated
+  invoice_deleted: Invoice deleted
+  confirm_invoice_delete: |+
+    Are you sure you want to delete the following invoice:
+
+    ID %{id}
+    %{player_name}
+
+  # PAYMENTS
+  payment_created: Payment created
+  payment_updated: Payment updated
+  payment_deleted: Payment deleted
+  confirm_payment_delete: |+
+    Are you sure you want to delete the following invoice:
+
+    ID %{id}
+    %{player_name}
+
   date:
     abbr_day_names:
     - Sun
