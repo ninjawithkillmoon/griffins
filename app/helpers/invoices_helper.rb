@@ -13,13 +13,13 @@ module InvoicesHelper
 
   def invoice_row_class(p_invoice)
     case
-    when p_invoice.outstanding < 0.0
+    when p_invoice.outstanding < 0
       return "info"
-    when p_invoice.outstanding == 0.0
+    when p_invoice.outstanding == 0
       return "success"
     when p_invoice.outstanding >= p_invoice.amount
       return "error"
-    when p_invoice.outstanding > 0.0
+    when p_invoice.outstanding > 0
       return "warning"
     end
   end
@@ -27,6 +27,5 @@ module InvoicesHelper
   def status_types
     {"Paid" => :paid, "Outstanding" => :outstanding, "Refund Required" => :refund}
   end
-
 
 end

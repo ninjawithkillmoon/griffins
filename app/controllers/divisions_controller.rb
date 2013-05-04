@@ -5,7 +5,8 @@ class DivisionsController < ApplicationController
   add_breadcrumb "Divisions", :divisions_path
 
   def index
-    @divisions = Division.joins('LEFT JOIN seasons on seasons.id = divisions.season_id').order('seasons.date_start DESC, divisions.sex, divisions.name').paginate(page: params[:page])
+    fetch_divisions
+    fetch_seasons
   end
 
   def show
@@ -65,5 +66,13 @@ class DivisionsController < ApplicationController
 
   def fetch_division
     @division = Division.find(params[:id])
+  end
+
+  def fetch_divisions
+    @divisions = Division.joins('LEFT JOIN seasons on seasons.id = divisions.season_id').order('seasons.date_start DESC, divisions.sex, divisions.name').paginate(page: params[:page])
+  end
+
+  def fetch_seasons
+    @seasons = Season.order("date_start DESC")
   end
 end

@@ -4,4 +4,15 @@
 
 jQuery ->
   jQuery("#division_season_id").select2()
+  
   jQuery("#division_sex").select2()
+  
+  jQuery("#season_id").select2(
+    placeholder: "Select a Season",
+    allowClear: true
+  )
+
+  jQuery("#sex").select2(
+    placeholder: "Select a Sex",
+    allowClear: true
+  )
