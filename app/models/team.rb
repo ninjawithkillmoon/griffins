@@ -30,7 +30,7 @@ class Team < ActiveRecord::Base
         notes = "Automatically generated invoice for #{team.division.season.name}"
 
         if invoice.nil?
-          invoice = Invoice.new(player_id: player.id, season_id: team.division.season.id, amount: cost, notes: notes)
+          invoice = Invoice.new(player_id: player.id, season_id: team.division.season.id, amount: cost, outstanding: cost, notes: notes)
           invoice.save!
         end
       end
