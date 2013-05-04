@@ -13,6 +13,8 @@ module PaymentsHelper
       return "Cash"
     when METHOD_CHEQUE
       return "Cheque"
+    when METHOD_DISCOUNT
+      return "Discount"
     end
   end
 end
