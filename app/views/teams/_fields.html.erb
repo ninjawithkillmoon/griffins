@@ -10,7 +10,7 @@
 <div class="control-group">
   <%= f.label :division_id, class: "control-label" %>
   <div class="controls">
-    <%= f.select :division_id, Division.all.collect { |division| ["#{division.season.name} - #{division.name} (#{sex_string(division.sex)})", division.id] }, {}, {class: "fill"} %>
+    <%= f.select :division_id, @divisions.collect { |division| ["#{division.season.name} - #{division.name} (#{sex_string(division.sex)})", division.id] }, {}, {class: "fill"} %>
   </div>
 </div>
 

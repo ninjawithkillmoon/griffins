@@ -16,12 +16,14 @@ class TeamsController < ApplicationController
 
   def new
     @team = Team.new
+    fetch_divisions
 
     add_breadcrumb "New", new_team_path
   end
 
   def create
     @team = Team.new(params[:team])
+    fetch_divisions
 
     add_breadcrumb "New", new_team_path
 
@@ -35,6 +37,7 @@ class TeamsController < ApplicationController
 
   def edit
     fetch_team
+    fetch_divisions
 
     add_breadcrumb @team.name, @team
     add_breadcrumb "Edit", edit_team_path(@team)
@@ -42,6 +45,7 @@ class TeamsController < ApplicationController
 
   def update
     fetch_team
+    fetch_divisions
 
     add_breadcrumb @team.name, @team
     add_breadcrumb "Edit", edit_team_path(@team)
@@ -65,5 +69,9 @@ class TeamsController < ApplicationController
 
   def fetch_team
     @team = Team.find(params[:id])
+  end
+
+  def fetch_divisions
+    @divisions = Division.joins('LEFT JOIN seasons on seasons.id = divisions.season_id').order('seasons.date_start DESC, divisions.sex, divisions.name').paginate(page: params[:page])
   end
 end
