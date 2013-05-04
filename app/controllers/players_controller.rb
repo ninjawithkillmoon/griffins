@@ -47,7 +47,7 @@ class PlayersController < ApplicationController
   def update
     fetch_player
 
-    add_breadcrumb @player.name, @player
+    add_breadcrumb full_name(@player), @player
     add_breadcrumb "Edit", edit_player_path(@player)
 
     if @player.update_attributes(params[:player])
