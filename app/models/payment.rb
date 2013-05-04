@@ -12,7 +12,7 @@
 #
 
 class Payment < ActiveRecord::Base
-  attr_accessible :amount, :method, :notes, :invoice_id
+  attr_accessible :amount, :amount_dollars, :method, :notes, :invoice_id
 
   belongs_to :invoice
 
@@ -31,4 +31,6 @@ class Payment < ActiveRecord::Base
       format: {with: VALID_METHOD_REGEX},
     }
   )
+
+  monetize :amount, as: :amount_dollars
 end

@@ -11,6 +11,7 @@ gem 'will_paginate'
 gem 'bootstrap-will_paginate'
 gem 'select2-rails'
 gem 'roo'
+gem 'money-rails'
 
 group :development do
   gem 'sqlite3'

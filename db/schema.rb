@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130503054859) do
+ActiveRecord::Schema.define(:version => 20130504124939) do
 
   create_table "competitions", :force => true do |t|
     t.string   "name"
@@ -29,15 +29,16 @@ ActiveRecord::Schema.define(:version => 20130503054859) do
 
   create_table "invoices", :force => true do |t|
     t.text     "notes"
-    t.decimal  "amount"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.integer  "amount"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
     t.integer  "player_id"
     t.integer  "season_id"
+    t.integer  "outstanding"
   end
 
   create_table "payments", :force => true do |t|
-    t.decimal  "amount"
+    t.integer  "amount"
     t.integer  "method"
     t.text     "notes"
     t.datetime "created_at", :null => false
@@ -65,8 +66,8 @@ ActiveRecord::Schema.define(:version => 20130503054859) do
   create_table "seasons", :force => true do |t|
     t.string   "name"
     t.date     "date_start"
-    t.decimal  "cost"
-    t.decimal  "cost_student"
+    t.integer  "cost"
+    t.integer  "cost_student"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
     t.integer  "competition_id"

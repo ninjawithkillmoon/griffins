@@ -12,11 +12,18 @@
 #
 
 class Invoice < ActiveRecord::Base
-  attr_accessible :amount, :notes, :payment_ids, :season_id, :player_id
+  attr_accessible :amount, :notes, :outstanding, :outstanding_dollars, :payment_ids, :season_id, :player_id
 
   has_many :payments, dependent: :restrict
   belongs_to :season
   belongs_to :player
+
+  #scope :for_season, lambda { |value| where('season_id = ?', value) unless value.blank? }
+  #scope :for_player, lambda { |value| where('player_id = ?', value) unless value.blank? }
+
+  before_save do |invoice|
+    invoice.outstanding = invoice.amount if invoice.outstanding.nil?
+  end
 
   validates(:player, {
       presence: true,
@@ -28,17 +35,45 @@ class Invoice < ActiveRecord::Base
     }
   )
 
-  def outstanding
-    @outstanding ||= calc_outstanding
+  monetize :amount     , as: :amount_dollars
+  monetize :outstanding, as: :outstanding_dollars
+
+  def pay(p_amount)
+    self.outstanding -= p_amount
+    self.save!
   end
 
-  def calc_outstanding
-    remains = self.amount
+  def unpay(p_amount)
+    self.outstanding += p_amount
+    self.save!
+  end
 
-    self.payments.each do |payment|
-      remains -= payment.amount
+  def self.for_season(p_season_id)
+    unless p_season_id.blank?
+      where("season_id = ?", p_season_id)
+    else
+      scoped
     end
+  end
 
-    return remains
+  def self.for_player(p_player_id)
+    unless p_player_id.blank?
+      where("player_id = ?", p_player_id)
+    else
+      scoped
+    end
+  end
+
+  def self.with_status(p_status)
+    case p_status
+    when :paid
+      where('outstanding = ', 0.0)
+    when :outstanding
+      where('outstanding > ', 0.0)
+    when :refund
+      where('outstanding < ', 0.0)
+    else
+      scoped
+    end
   end
 end

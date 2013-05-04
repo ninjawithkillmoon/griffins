@@ -8,6 +8,8 @@ class InvoicesController < ApplicationController
 
   def index
     fetch_invoices
+    fetch_seasons
+    fetch_players
   end
 
   def show
@@ -63,7 +65,7 @@ class InvoicesController < ApplicationController
       @invoice.destroy
       flash[:success] = t(:invoice_deleted)
     rescue
-      flash[:error] = "Error: Cannot delete invoice with existing payments. Please remove payments separately or contact an administrator"
+      flash[:error] = "Error: Cannot delete invoice with existing payments. Please remove payments separately or contact an administrator."
     ensure
       redirect_to invoices_path
     end
@@ -76,6 +78,14 @@ class InvoicesController < ApplicationController
   end
 
   def fetch_invoices
-    @invoices = Invoice.order("updated_at").paginate(page: params[:page])
+    @invoices = Invoice.for_season(params[:season_id]).for_player(params[:player_id]).with_status(params[:status]).includes(:player).order("updated_at DESC").paginate(page: params[:page])
+  end
+
+  def fetch_seasons
+    @seasons = Season.order("date_start DESC")
+  end
+
+  def fetch_players
+    @players = Player.order("name_family, name_given")
   end
 end

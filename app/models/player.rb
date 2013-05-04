@@ -47,4 +47,8 @@ class Player < ActiveRecord::Base
     }
   )
 
+  def full_name
+    return name_given + " " + name_family
+  end
+
 end

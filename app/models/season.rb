@@ -13,7 +13,7 @@
 #
 
 class Season < ActiveRecord::Base
-  attr_accessible :cost, :cost_student, :date_start, :name, :competition_id, :division_ids
+  attr_accessible :cost, :cost_dollars, :cost_student, :cost_student_dollars, :date_start, :name, :competition_id, :division_ids
 
   has_many :divisions
   has_many :invoices
@@ -39,4 +39,7 @@ class Season < ActiveRecord::Base
       presence: true
     }
   )
+
+  monetize :cost,         as: :cost_dollars
+  monetize :cost_student, as: :cost_student_dollars
 end

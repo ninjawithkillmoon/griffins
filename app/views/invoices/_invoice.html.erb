@@ -2,8 +2,8 @@
   <td><%= link_to invoice_code(invoice), invoice %></td>
   <td><%= link_to full_name(invoice.player), invoice.player %></td>
   <td><%= invoice.season.nil? ? "" : link_to(invoice.season.name, invoice.season) %></td>
-  <td><%= number_to_currency invoice.amount %></td>
-  <td><%= number_to_currency invoice.outstanding %></td>
+  <td><%= number_to_currency invoice.amount_dollars %></td>
+  <td><%= number_to_currency invoice.outstanding_dollars %></td>
   <td><%= truncate invoice.notes %></td>
 
   <% if admin? %>

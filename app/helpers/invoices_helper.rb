@@ -23,4 +23,10 @@ module InvoicesHelper
       return "warning"
     end
   end
+
+  def status_types
+    {"Paid" => :paid, "Outstanding" => :outstanding, "Refund Required" => :refund}
+  end
+
+
 end

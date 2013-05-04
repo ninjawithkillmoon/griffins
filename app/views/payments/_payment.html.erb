@@ -2,7 +2,7 @@
   <td><%= link_to payment_code(payment), payment %></td>
   <td><%= link_to invoice_code(payment.invoice), payment.invoice %></td>
   <td><%= link_to full_name(payment.invoice.player), payment.invoice.player %></td>
-  <td><%= number_to_currency payment.amount %></td>
+  <td><%= number_to_currency payment.amount_dollars %></td>
   <td><%= payment_type(payment.method) %></td>
   <td><%= truncate payment.notes %></td>
   <% if admin? %>
