@@ -12,7 +12,7 @@
 #
 
 class Invoice < ActiveRecord::Base
-  attr_accessible :amount, :notes, :outstanding, :outstanding_dollars, :payment_ids, :season_id, :player_id
+  attr_accessible :amount, :amount_dollars, :notes, :outstanding, :outstanding_dollars, :payment_ids, :season_id, :player_id
 
   has_many :payments, dependent: :restrict
   belongs_to :season
