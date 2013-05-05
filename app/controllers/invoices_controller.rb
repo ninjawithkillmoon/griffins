@@ -83,7 +83,7 @@ class InvoicesController < ApplicationController
                        .with_status(params[:status])
                        .for_player_with_sex(params[:sex])
                        .includes(:player)
-                       .order("invoices.updated_at DESC")
+                       .order("players.name_family ASC, players.name_given ASC")
                        .paginate(page: params[:page])
   end
 
