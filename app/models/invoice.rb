@@ -76,12 +76,12 @@ class Invoice < ActiveRecord::Base
 
   def self.with_status(p_status)
     case p_status
-    when :paid
-      where('outstanding = ', 0.0)
-    when :outstanding
-      where('outstanding > ', 0.0)
-    when :refund
-      where('outstanding < ', 0.0)
+    when "paid"
+      where('outstanding = ?', 0)
+    when "outstanding"
+      where('outstanding > ?', 0)
+    when "refund"
+      where('outstanding < ?', 0)
     else
       scoped
     end
