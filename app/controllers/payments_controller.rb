@@ -28,8 +28,6 @@ class PaymentsController < ApplicationController
     add_breadcrumb "New", new_payment_path
 
     if @payment.save
-      update_invoice_amount
-
       flash[:success] = t(:payment_created)
       redirect_to @payment
     else
@@ -51,8 +49,6 @@ class PaymentsController < ApplicationController
     add_breadcrumb "Edit", edit_payment_path(@payment)
 
     if @payment.update_attributes(params[:payment])
-      update_invoice_amount
-
       flash[:success] = t(:payment_updated)
       redirect_to @payment
     else
@@ -64,8 +60,6 @@ class PaymentsController < ApplicationController
     fetch_payment
 
     @payment.destroy
-
-    update_invoice_amount
 
     flash[:success] = t(:payment_deleted)
     redirect_to payments_path
@@ -79,10 +73,5 @@ class PaymentsController < ApplicationController
 
   def fetch_invoice
     @invoice = @payment.invoice
-  end
-
-  def update_invoice_amount
-    @payment.invoice.recalculate_outstanding
-    @payment.invoice.save!
   end
 end

@@ -18,9 +18,6 @@ class Invoice < ActiveRecord::Base
   belongs_to :season
   belongs_to :player
 
-  #scope :for_season, lambda { |value| where('season_id = ?', value) unless value.blank? }
-  #scope :for_player, lambda { |value| where('player_id = ?', value) unless value.blank? }
-
   before_validation do |invoice|
     invoice.recalculate_outstanding
   end

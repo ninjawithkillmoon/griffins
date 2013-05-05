@@ -16,6 +16,16 @@ class Payment < ActiveRecord::Base
 
   belongs_to :invoice
 
+  after_save do |payment|
+    payment.invoice.recalculate_outstanding
+    payment.invoice.save!
+  end
+
+  after_destroy do |payment|
+    payment.invoice.recalculate_outstanding
+    payment.invoice.save!
+  end
+
   validates(:invoice, {
       presence: true,
     }
