@@ -6,6 +6,8 @@ class SeasonsController < ApplicationController
 
   def index
     @seasons = Season.paginate(page: params[:page])
+
+    @total = @seasons.total_entries
   end
 
   def show

@@ -1,6 +1,6 @@
 <% provide(:title, 'All Users') %>
 
-<%= will_paginate %>
+<%= render 'layouts/pagination' %>
 
 <table class="table table-striped table-bordered table-hover">
   <tr>
@@ -16,7 +16,7 @@
 
 </table>
 
-<%= will_paginate %>
+<%= render 'layouts/pagination' %>
 
 <% provide :leftNavButtonBody, 'Home' %>
 <% provide :leftNavButtonUrl, root_path %>

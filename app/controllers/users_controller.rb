@@ -15,6 +15,8 @@ class UsersController < ApplicationController
 
   def index
     @users = User.paginate(page: params[:page])
+
+    @total = @users.total_entries
   end
 
   def new

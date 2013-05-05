@@ -7,6 +7,8 @@ class DivisionsController < ApplicationController
   def index
     fetch_divisions
     fetch_seasons
+
+    @total = @divisions.total_entries
   end
 
   def show

@@ -1,6 +1,11 @@
 <% provide(:title, 'All Players') %>
 
-<%= will_paginate %>
+<% if admin? %>
+  <% provide :actions, link_to(raw('<i class="icon-plus icon-white"></i> New Player'), new_player_path, class: "btn btn-large btn-primary") %>
+  <% provide :actions, link_to(raw('<i class="icon-upload icon-white"></i> Import Players'), new_player_path(active: "import"), class: "btn btn-large btn-primary") %>
+<% end %>
+
+<%= render 'layouts/pagination' %>
 
 <table class="table table-striped table-bordered table-hover">
   <tr>
@@ -21,14 +26,7 @@
 
 </table>
 
-<%= will_paginate %>
-
-<div class="nwkm_actions">
-  <% if admin? %>
-    <%= link_to raw('<i class="icon-plus icon-white"></i> New Player'), new_player_path, class: "btn btn-large btn-primary" %>
-    <%= link_to raw('<i class="icon-upload icon-white"></i> Import Players'), new_player_path(active: "import"), class: "btn btn-large btn-primary" %>
-  <% end %>
-</div>
+<%= render 'layouts/pagination' %>
 
 <% provide :leftNavButtonBody, 'Teams' %>
 <% provide :leftNavButtonUrl, teams_path %>

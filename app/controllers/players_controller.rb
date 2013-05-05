@@ -8,6 +8,8 @@ class PlayersController < ApplicationController
 
   def index
     @players = Player.order("name_family, name_given").paginate(page: params[:page])
+
+    @total = @players.total_entries
   end
 
   def show

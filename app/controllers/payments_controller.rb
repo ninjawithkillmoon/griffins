@@ -8,6 +8,8 @@ class PaymentsController < ApplicationController
 
   def index
     @payments = Payment.order("updated_at DESC").paginate(page: params[:page])
+
+    @total = @payments.total_entries
   end
 
   def show

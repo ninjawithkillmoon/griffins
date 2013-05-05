@@ -10,6 +10,8 @@ class InvoicesController < ApplicationController
     fetch_invoices
     fetch_seasons
     fetch_players
+
+    @total = @invoices.total_entries
   end
 
   def show

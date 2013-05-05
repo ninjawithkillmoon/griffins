@@ -8,6 +8,8 @@ class TeamsController < ApplicationController
     @teams = Team.joins('LEFT JOIN divisions on divisions.id = teams.division_id')
                  .joins('LEFT JOIN seasons on seasons.id = divisions.season_id')
                  .order('seasons.date_start DESC, divisions.sex, divisions.name, teams.name').paginate(page: params[:page])
+
+    @total = @teams.total_entries
   end
 
   def show

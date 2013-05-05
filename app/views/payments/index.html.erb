@@ -1,6 +1,10 @@
 <% provide(:title, 'All Payments') %>
 
-<%= will_paginate %>
+<% if admin? %>
+  <% provide :actions, link_to(raw('<i class="icon-plus icon-white"></i> New Payment'), new_payment_path, class: "btn btn-large btn-primary") %>
+<% end %>
+
+<%= render 'layouts/pagination' %>
 
 <table class="table table-striped table-bordered table-hover">
   <tr>
@@ -20,11 +24,7 @@
 
 </table>
 
-<%= will_paginate %>
-
-<% if admin? %>
-  <%= link_to raw('<i class="icon-plus icon-white"></i> New Payment'), new_payment_path, class: "btn btn-large btn-primary" %>
-<% end %>
+<%= render 'layouts/pagination' %>
 
 <% provide :leftNavButtonBody, 'Invoices' %>
 <% provide :leftNavButtonUrl, invoices_path %>

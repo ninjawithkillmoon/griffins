@@ -6,6 +6,8 @@ class CompetitionsController < ApplicationController
 
   def index
     @competitions = Competition.paginate(page: params[:page])
+
+    @total = @competitions.total_entries
   end
 
   def show
