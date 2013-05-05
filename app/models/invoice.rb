@@ -86,4 +86,12 @@ class Invoice < ActiveRecord::Base
       scoped
     end
   end
+
+  def self.for_player_with_sex(p_sex)
+    unless p_sex.blank?
+      joins(:player).where("players.sex = ?", p_sex)
+    else
+      scoped
+    end
+  end
 end

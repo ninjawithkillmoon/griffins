@@ -4,7 +4,8 @@
   <%= form_tag invoices_path, method: :get do %>
     <%= select_tag :season_id, options_from_collection_for_select(@seasons, :id, :name, params[:season_id]), {include_blank: true, class: "span3"} %>
     <%= select_tag :player_id, options_from_collection_for_select(@players, :id, :full_name, params[:player_id]), {include_blank: true, class: "span3"} %>
-    <%= select_tag :status, options_for_select(status_types, params[:status]), {include_blank: true, class: "span3"} %>
+    <%= select_tag :status, options_for_select(status_types, params[:status]), {include_blank: true, class: "span2"} %>
+    <%= select_tag :sex, options_for_select(sex_types, params[:sex]), {include_blank: true, class: "span2"} %>
     <%= button_tag type: :submit, class: "btn" do %>
       <i class="icon-search icon-white"></i> Search
     <% end %>

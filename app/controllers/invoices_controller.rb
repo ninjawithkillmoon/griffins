@@ -78,7 +78,13 @@ class InvoicesController < ApplicationController
   end
 
   def fetch_invoices
-    @invoices = Invoice.for_season(params[:season_id]).for_player(params[:player_id]).with_status(params[:status]).includes(:player).order("updated_at DESC").paginate(page: params[:page])
+    @invoices = Invoice.for_season(params[:season_id])
+                       .for_player(params[:player_id])
+                       .with_status(params[:status])
+                       .for_player_with_sex(params[:sex])
+                       .includes(:player)
+                       .order("invoices.updated_at DESC")
+                       .paginate(page: params[:page])
   end
 
   def fetch_seasons
