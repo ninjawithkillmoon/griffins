@@ -21,8 +21,8 @@ class Invoice < ActiveRecord::Base
   #scope :for_season, lambda { |value| where('season_id = ?', value) unless value.blank? }
   #scope :for_player, lambda { |value| where('player_id = ?', value) unless value.blank? }
 
-  before_save do |invoice|
-    invoice.outstanding = invoice.amount if invoice.outstanding.nil?
+  before_validation do |invoice|
+    invoice.recalculate_outstanding
   end
 
   validates(:player, {
@@ -37,6 +37,19 @@ class Invoice < ActiveRecord::Base
 
   monetize :amount     , as: :amount_dollars
   monetize :outstanding, as: :outstanding_dollars
+
+  # Goes through the payments made to this invoice and recalculates the outstanding amount. 
+  #
+  # Sets self.outstanding to the oustanding amount. Does not perform any save of this object.
+  #
+  def recalculate_outstanding
+    due = self.amount
+    self.payments.each do |payment|
+      due -= payment.amount
+    end
+
+    self.outstanding = due
+  end
 
   def pay(p_amount)
     self.outstanding -= p_amount

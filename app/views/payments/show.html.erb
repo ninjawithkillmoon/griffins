@@ -12,7 +12,7 @@
       <%= dtdd 'Notes', @payment.notes %>
       
       <% if admin? %>
-        <%= dtdd '', link_to(raw("<i class='icon-edit'></i> Edit"), edit_payment_path(@payment), class: "btn btn-large btn-warning") %>
+        <%= dtdd '', link_to(raw("<i class='icon-edit'></i> Edit"), edit_payment_path(@payment), class: "btn btn-large btn-warning") + " " + link_to(raw('<i class="icon-trash icon-white"></i> Delete'), @payment, class: "btn btn-large btn-danger", method: :delete, data: { confirm: t(:confirm_payment_delete, {id: @payment.id, player_name: full_name(@payment.invoice.player)}) }) %>
       <% end %>
     </dl>
   </div>
