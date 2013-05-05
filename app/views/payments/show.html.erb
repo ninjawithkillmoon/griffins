@@ -9,6 +9,7 @@
       <%= dtdd 'Season', (@payment.invoice.season.nil? ? raw("&nbsp;") : link_to(@payment.invoice.season.name, @payment.invoice.season)) %>
       <%= dtdd 'Amount', number_to_currency(@payment.amount_dollars) %>
       <%= dtdd 'Created At', l(@payment.created_at.in_time_zone(LOCAL_TIMEZONE), format: :long) %>
+      <%= dtdd 'Payment Type', payment_type(@payment.method) %>
       <%= dtdd 'Notes', @payment.notes %>
       
       <% if admin? %>
