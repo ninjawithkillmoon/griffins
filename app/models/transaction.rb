@@ -19,6 +19,12 @@ class Transaction < ActiveRecord::Base
   belongs_to :invoice
   belongs_to :category, class_name: "TransactionCategory"
 
+  before_save do |transaction|
+    unless transaction.credit?
+      transaction.amount = 0 - transaction.amount
+    end
+  end
+
   after_save do |transaction|
     recalculate_outstanding(transaction)
   end
@@ -71,6 +77,42 @@ class Transaction < ActiveRecord::Base
     else
       return "debit"
     end
+  end
+
+  def self.after(p_date)
+    unless p_date.blank?
+      where("paid_at > ?", p_date)
+    else
+      scoped
+    end
+  end
+
+  def self.after_inclusive(p_date)
+    unless p_date.blank?
+      where("paid_at >= ?", p_date)
+    else
+      scoped
+    end
+  end
+
+  def self.before(p_date)
+    unless p_date.blank?
+      where("paid_at < ?", p_date)
+    else
+      scoped
+    end
+  end
+
+  def self.before_inclusive(p_date)
+    unless p_date.blank?
+      where("paid_at <= ?", p_date)
+    else
+      scoped
+    end
+  end
+
+  def self.sum()
+    select("sum(amount_dollars) as total")
   end
 
   private # ----------------------------------------------------------

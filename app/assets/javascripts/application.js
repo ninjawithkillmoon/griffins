@@ -15,3 +15,4 @@
 //= require twitter/bootstrap
 //= require_tree .
 //= require select2
+//= require bootstrap-datetimepicker.min

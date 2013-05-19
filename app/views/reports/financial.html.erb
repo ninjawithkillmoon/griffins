@@ -1,0 +1,85 @@
+<% provide(:title, 'Financial Report') %>
+
+<div id="nwkm_filters">
+  <%= form_tag 'financial', method: :get do %>
+
+    <div id="date_start" class="input-append span3">
+      <input name="date_start" type="text" placeholder="Select a start date" data-format="yyyy-MM-dd" value="<%= params[:date_start] %>"></input>
+      <span class="add-on">
+        <i class="icon-calendar"></i>
+      </span>
+    </div>
+
+    <div id="date_end" class="input-append span3">
+      <input name="date_end" type="text" placeholder="Select an end date" data-format="yyyy-MM-dd" value="<%= params[:date_end] %>"></input>
+      <span class="add-on">
+        <i class="icon-calendar"></i>
+      </span>
+    </div>
+
+    <%= button_tag type: :submit, class: "btn" do %>
+      <i class="icon-search icon-white"></i> Search
+    <% end %>
+  <% end %>
+</div>
+
+<table class="table table-striped table-bordered table-hover">
+  <tr>
+    <th>Category</th>
+    <th>Revenue / Expense</th>
+  </tr>
+  <% @report.sectionsRevenue.each do |name, section| %>
+    <tr class="info">
+      <td><strong>Revenue for <%= name %></strong></td>
+      <td></td>
+    </tr>
+    <% section.lines.each do |name, amount| %>
+      <tr class="success">
+        <td><%= name %></td>
+        <td><%= amount %></td>
+      <tr>
+    <% end %>
+    <tr class="success">
+      <td><strong>Total revenue for <%= name %></strong></td>
+      <td><strong><%= section.total %></strong></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td></td>
+    </tr>
+  <% end %>
+  <% @report.sectionsExpense.each do |name, section| %>
+    <tr class="info">
+      <td><strong>Expenses for <%= name %></strong></td>
+      <td></td>
+    </tr>
+    <% section.lines.each do |name, amount| %>
+      <tr class="error">
+        <td><%= name %></td>
+        <td><%= amount %></td>
+      <tr>
+    <% end %>
+    <tr class="error">
+      <td><strong>Total expense for <%= name %></strong></td>
+      <td><strong><%= section.total %></strong></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td></td>
+    </tr>
+  <% end %>
+</table>
+
+<p>Balance before: <%= @balanceBefore %></p>
+<p>Balance after: <%= @balanceAfter %></p>
+<p>Before: 
+  <% @transactionsBefore.each do |t| %>
+    <%= t.id %> (<%= t.amount_dollars %>), 
+  <% end %>
+</p>
+<p>During: 
+  <% @transactionsDuring.each do |t| %>
+    <%= t.id %> (<%= t.amount_dollars %>), 
+  <% end %>
+</p>
+

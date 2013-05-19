@@ -11,6 +11,8 @@ NwkmGriffins::Application.routes.draw do
   resources :transactions
 
   root to: 'static_pages#home'
+
+  match 'reports/financial', to: 'reports#financial'
   
   match '/about',   to: 'static_pages#about'
   match '/contact', to: 'static_pages#contact'

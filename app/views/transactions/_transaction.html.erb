@@ -5,7 +5,7 @@
   <td><%= transaction.invoice.nil? ? "" : link_to(invoice_code(transaction.invoice), transaction.invoice) %></td>
   <td><%= transaction.invoice.nil? || transaction.invoice.player.nil? ? "" : link_to(full_name(transaction.invoice.player), transaction.invoice.player) %></td>
   <td><%= number_to_currency transaction.amount_dollars %></td>
-  <td><%= transaction.method.titleize %></td>
+  <td><%= l(transaction.paid_at.to_datetime.in_time_zone(LOCAL_TIMEZONE), format: :long) %></td>
   <td><%= truncate transaction.notes %></td>
   <% if admin? %>
     <td><%= link_to raw('<i class="icon-edit icon-white"></i> Edit'), edit_transaction_path(transaction), {class: "btn btn-warning"} %></td>

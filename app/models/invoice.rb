@@ -43,11 +43,7 @@ class Invoice < ActiveRecord::Base
   def recalculate_outstanding
     due = self.amount
     self.transactions.each do |transaction|
-      if transaction.credit?
-        due -= transaction.amount
-      else
-        due += transaction.amount
-      end
+      due -= transaction.amount
     end
 
     self.outstanding = due
