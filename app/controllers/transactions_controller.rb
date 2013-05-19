@@ -7,7 +7,7 @@ class TransactionsController < ApplicationController
   add_breadcrumb "Transactions", :transactions_path
 
   def index
-    @transactions = Transaction.order("updated_at DESC").paginate(page: params[:page])
+    @transactions = Transaction.order("paid_at DESC").paginate(page: params[:page])
 
     @total = @transactions.total_entries
   end
