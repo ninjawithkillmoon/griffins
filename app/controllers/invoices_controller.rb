@@ -67,7 +67,7 @@ class InvoicesController < ApplicationController
       @invoice.destroy
       flash[:success] = t(:invoice_deleted)
     rescue
-      flash[:error] = "Error: Cannot delete invoice with existing payments. Please remove payments separately or contact an administrator."
+      flash[:error] = "Error: Cannot delete invoice with existing transactions. Please remove transactions separately or contact an administrator."
     ensure
       redirect_to invoices_path
     end

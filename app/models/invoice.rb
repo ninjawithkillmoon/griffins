@@ -2,19 +2,20 @@
 #
 # Table name: invoices
 #
-#  id         :integer          not null, primary key
-#  notes      :text
-#  amount     :decimal(, )
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#  player_id  :integer
-#  season_id  :integer
+#  id          :integer          not null, primary key
+#  notes       :text
+#  amount      :integer
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  player_id   :integer
+#  season_id   :integer
+#  outstanding :integer
 #
 
 class Invoice < ActiveRecord::Base
-  attr_accessible :amount, :amount_dollars, :notes, :outstanding, :outstanding_dollars, :payment_ids, :season_id, :player_id
+  attr_accessible :amount, :amount_dollars, :notes, :outstanding, :outstanding_dollars, :transaction_ids, :season_id, :player_id
 
-  has_many :payments, dependent: :restrict
+  has_many :transactions, dependent: :restrict
   belongs_to :season
   belongs_to :player
 
@@ -35,14 +36,18 @@ class Invoice < ActiveRecord::Base
   monetize :amount     , as: :amount_dollars
   monetize :outstanding, as: :outstanding_dollars
 
-  # Goes through the payments made to this invoice and recalculates the outstanding amount. 
+  # Goes through the transactions made to this invoice and recalculates the outstanding amount. 
   #
   # Sets self.outstanding to the oustanding amount. Does not perform any save of this object.
   #
   def recalculate_outstanding
     due = self.amount
-    self.payments.each do |payment|
-      due -= payment.amount
+    self.transactions.each do |transaction|
+      if transaction.credit?
+        due -= transaction.amount
+      else
+        due += transaction.amount
+      end
     end
 
     self.outstanding = due

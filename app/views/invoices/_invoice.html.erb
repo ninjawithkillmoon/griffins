@@ -8,7 +8,7 @@
 
   <% if admin? %>
     <td>
-      <%= link_to raw('<i class="icon-credit-card icon-white"></i> Pay'), new_payment_path('payment[invoice_id]' => invoice.id), {class: "btn btn-primary"} %>
+      <%= link_to raw('<i class="icon-credit-card icon-white"></i> Pay'), new_transaction_path('transaction[invoice_id]' => invoice.id), {class: "btn btn-primary"} %>
     </td>
     <td>
       <%= link_to raw('<i class="icon-edit icon-white"></i> Edit'), edit_invoice_path(invoice), {class: "btn btn-warning"} %>

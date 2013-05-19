@@ -1,7 +1,7 @@
-<% provide(:title, 'All Payments') %>
+<% provide(:title, 'All Transactions') %>
 
 <% if admin? %>
-  <% provide :actions, link_to(raw('<i class="icon-plus icon-white"></i> New Payment'), new_payment_path, class: "btn btn-large btn-primary") %>
+  <% provide :actions, link_to(raw('<i class="icon-plus icon-white"></i> New Transaction'), new_transaction_path, class: "btn btn-large btn-primary") %>
 <% end %>
 
 <%= render 'layouts/pagination' %>
@@ -9,6 +9,8 @@
 <table class="table table-striped table-bordered table-hover">
   <tr>
     <th>Code</th>
+    <th>Type</th>
+    <th>Category</th>
     <th>Invoice</th>
     <th>Player</th>
     <th>Amount</th>
@@ -20,7 +22,7 @@
     <% end %>
   </tr>
 
-  <%=render @payments %>
+  <%=render @transactions %>
 
 </table>
 

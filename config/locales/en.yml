@@ -91,15 +91,17 @@ en:
     ID %{id}
     %{player_name}
 
-  # PAYMENTS
-  payment_created: Payment created
-  payment_updated: Payment updated
-  payment_deleted: Payment deleted
-  confirm_payment_delete: |+
-    Are you sure you want to delete the following payment:
+  # TRANSACTIONS
+  transaction_created: Transaction created
+  transaction_updated: Transaction updated
+  transaction_deleted: Transaction deleted
+  confirm_transaction_delete: |+
+    Are you sure you want to delete the following transaction:
 
     ID %{id}
-    %{player_name}
+    %{type}
+    %{category}
+    %{amount}
 
   date:
     abbr_day_names:

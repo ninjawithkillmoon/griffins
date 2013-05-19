@@ -5,8 +5,8 @@
 #  id             :integer          not null, primary key
 #  name           :string(255)
 #  date_start     :date
-#  cost           :decimal(, )
-#  cost_student   :decimal(, )
+#  cost           :integer
+#  cost_student   :integer
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
 #  competition_id :integer

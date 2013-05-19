@@ -1,9 +1,9 @@
-<% provide(:title, payment_code(@payment)) %>
+<% provide(:title, @transaction.code) %>
 <% provide(:titleSmall, "Edit") %>
 
 <div class="row">
   <div class="span6 offset3">
-    <%= form_for(@payment, html: {class: "form-horizontal well"}) do |f| %>
+    <%= form_for(@transaction, html: {class: "form-horizontal well"}) do |f| %>
       
       <%=render 'fields', f: f %>
 
@@ -11,11 +11,11 @@
         <%= button_tag(type: :submit, class: "btn btn-large btn-success") do %>
           <i class='icon-ok'></i> Save changes
         <% end %>
-        <%= link_to raw("<i class='icon-remove'></i> Cancel"), @payment, class: "btn btn-large" %>
+        <%= link_to raw("<i class='icon-remove'></i> Cancel"), @transaction, class: "btn btn-large" %>
       </div>
     <% end %>
   </div>
 </div>
 
-<% provide :leftNavButtonBody, 'Payments' %>
-<% provide :leftNavButtonUrl, payments_path %>
+<% provide :leftNavButtonBody, 'Transactions' %>
+<% provide :leftNavButtonUrl, transactions_path %>

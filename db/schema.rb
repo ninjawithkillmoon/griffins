@@ -11,7 +11,32 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130504124939) do
+ActiveRecord::Schema.define(:version => 20130518061423) do
+
+  create_table "blog_comments", :force => true do |t|
+    t.string   "name",       :null => false
+    t.string   "email",      :null => false
+    t.string   "website"
+    t.text     "body",       :null => false
+    t.integer  "post_id",    :null => false
+    t.string   "state"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "blog_comments", ["post_id"], :name => "index_blog_comments_on_post_id"
+
+  create_table "blog_posts", :force => true do |t|
+    t.string   "title",                         :null => false
+    t.text     "body",                          :null => false
+    t.integer  "blogger_id"
+    t.string   "blogger_type"
+    t.integer  "comments_count", :default => 0, :null => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
+  end
+
+  add_index "blog_posts", ["blogger_type", "blogger_id"], :name => "index_blog_posts_on_blogger_type_and_blogger_id"
 
   create_table "competitions", :force => true do |t|
     t.string   "name"
@@ -37,13 +62,49 @@ ActiveRecord::Schema.define(:version => 20130504124939) do
     t.integer  "outstanding"
   end
 
-  create_table "payments", :force => true do |t|
-    t.integer  "amount"
-    t.integer  "method"
-    t.text     "notes"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-    t.integer  "invoice_id"
+  create_table "monologue_posts", :force => true do |t|
+    t.integer  "posts_revision_id"
+    t.boolean  "published"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+  end
+
+  create_table "monologue_posts_revisions", :force => true do |t|
+    t.string   "title"
+    t.text     "content"
+    t.string   "url"
+    t.integer  "user_id"
+    t.integer  "post_id"
+    t.datetime "published_at"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  add_index "monologue_posts_revisions", ["id"], :name => "index_monologue_posts_revisions_on_id", :unique => true
+  add_index "monologue_posts_revisions", ["post_id"], :name => "index_monologue_posts_revisions_on_post_id"
+  add_index "monologue_posts_revisions", ["published_at"], :name => "index_monologue_posts_revisions_on_published_at"
+  add_index "monologue_posts_revisions", ["url"], :name => "index_monologue_posts_revisions_on_url"
+
+  create_table "monologue_taggings", :force => true do |t|
+    t.integer "post_id"
+    t.integer "tag_id"
+  end
+
+  add_index "monologue_taggings", ["post_id"], :name => "index_monologue_taggings_on_post_id"
+  add_index "monologue_taggings", ["tag_id"], :name => "index_monologue_taggings_on_tag_id"
+
+  create_table "monologue_tags", :force => true do |t|
+    t.string "name"
+  end
+
+  add_index "monologue_tags", ["name"], :name => "index_monologue_tags_on_name"
+
+  create_table "monologue_users", :force => true do |t|
+    t.string   "name"
+    t.string   "email"
+    t.string   "password_digest"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
   end
 
   create_table "players", :force => true do |t|
@@ -73,11 +134,46 @@ ActiveRecord::Schema.define(:version => 20130504124939) do
     t.integer  "competition_id"
   end
 
+  create_table "taggings", :force => true do |t|
+    t.integer  "tag_id"
+    t.integer  "taggable_id"
+    t.string   "taggable_type"
+    t.integer  "tagger_id"
+    t.string   "tagger_type"
+    t.string   "context"
+    t.datetime "created_at"
+  end
+
+  add_index "taggings", ["tag_id"], :name => "index_taggings_on_tag_id"
+  add_index "taggings", ["taggable_id", "taggable_type", "context"], :name => "index_taggings_on_taggable_id_and_taggable_type_and_context"
+
+  create_table "tags", :force => true do |t|
+    t.string "name"
+  end
+
   create_table "teams", :force => true do |t|
     t.string   "name"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
     t.integer  "division_id"
+  end
+
+  create_table "transaction_categories", :force => true do |t|
+    t.string   "name"
+    t.integer  "parent_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "transactions", :force => true do |t|
+    t.boolean  "credit"
+    t.string   "method"
+    t.decimal  "amount"
+    t.text     "notes"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.integer  "invoice_id"
+    t.integer  "category_id"
   end
 
   create_table "users", :force => true do |t|

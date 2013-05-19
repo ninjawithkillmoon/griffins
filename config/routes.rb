@@ -8,7 +8,7 @@ NwkmGriffins::Application.routes.draw do
   resources :sessions, only: [:new, :create, :destroy]
   resources :player_imports, only: [:new, :create]
   resources :invoices
-  resources :payments
+  resources :transactions
 
   root to: 'static_pages#home'
   

@@ -1,0 +1,25 @@
+<% provide(:title, @transaction.code) %>
+
+<div class="row">
+  <div class="span6 offset3">
+    <dl class="dl-horizontal">
+      <%= dtdd 'Code', @transaction.code %>
+      <% unless @transaction.invoice.nil? %>
+        <%= dtdd 'Invoice', link_to(invoice_code(@transaction.invoice), @transaction.invoice) %>
+        <%= dtdd 'Player', (@transaction.invoice.player.nil? ? raw("&nbsp;") : link_to(full_name(@transaction.invoice.player), @transaction.invoice.player)) %>
+        <%= dtdd 'Season', (@transaction.invoice.season.nil? ? raw("&nbsp;") : link_to(@transaction.invoice.season.name, @transaction.invoice.season)) %>
+      <% end %>
+      <%= dtdd 'Amount', number_to_currency(@transaction.amount_dollars) %>
+      <%= dtdd 'Created At', l(@transaction.created_at.in_time_zone(LOCAL_TIMEZONE), format: :long) %>
+      <%= dtdd 'Method', @transaction.method %>
+      <%= dtdd 'Notes', @transaction.notes %>
+      
+      <% if admin? %>
+        <%= dtdd '', link_to(raw("<i class='icon-edit'></i> Edit"), edit_transaction_path(@transaction), class: "btn btn-large btn-warning") + " " + link_to(raw('<i class="icon-trash icon-white"></i> Delete'), @transaction, class: "btn btn-large btn-danger", method: :delete, data: { confirm: t(:confirm_transaction_delete, {id: @transaction.id, type: @transaction.type_string.titleize, category: @transaction.category.name, amount: @transaction.amount}) }) %>
+      <% end %>
+    </dl>
+  </div>
+</div>
+
+<% provide :leftNavButtonBody, 'Transactions' %>
+<% provide :leftNavButtonUrl, transactions_path %>

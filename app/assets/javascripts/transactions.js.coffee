@@ -3,5 +3,11 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
 jQuery ->
-  jQuery("#payment_invoice_id").select2()
-  jQuery("#payment_method").select2()
+  jQuery("#transaction_category_id").select2()
+
+  jQuery("#transaction_invoice_id").select2(
+    placeholder: "Select an Invoice",
+    allowClear: true
+  )
+  
+  jQuery("#transaction_method").select2()

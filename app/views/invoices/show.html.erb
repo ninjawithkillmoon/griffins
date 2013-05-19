@@ -12,21 +12,21 @@
       <%= dtdd 'Updated At', l(@invoice.updated_at.in_time_zone(LOCAL_TIMEZONE), format: :long) %>
       <%= dtdd 'Notes', @invoice.notes %>
 
-      <% unless @invoice.payments.empty? %>
+      <% unless @invoice.transactions.empty? %>
         <dt>
-          Payments
+          Transactions
         </dt>
         <dd>
           <ul class="unstyled">
-            <% @invoice.payments.each do |payment| %>
-              <li><%= link_to "#{payment_code(payment)} - #{number_to_currency(payment.amount_dollars)}", payment_path(payment) %></li>
+            <% @invoice.transactions.each do |transaction| %>
+              <li><%= link_to "#{transaction.code} - #{number_to_currency(transaction.amount_dollars)}", transaction_path(transaction) %></li>
             <% end %>
           </ul>
         </dd>
       <% end %>
       
       <% if admin? %>
-        <%= dtdd '', link_to(raw("<i class='icon-edit'></i> Edit"), edit_invoice_path(@invoice), class: "btn btn-large btn-warning") + " " + link_to(raw("<i class='icon-credit-card'></i> Pay"), new_payment_path('payment[invoice_id]' => @invoice.id), class: "btn btn-large btn-primary") %>
+        <%= dtdd '', link_to(raw("<i class='icon-edit'></i> Edit"), edit_invoice_path(@invoice), class: "btn btn-large btn-warning") + " " + link_to(raw("<i class='icon-credit-card'></i> Pay"), new_transaction_path('transaction[invoice_id]' => @invoice.id), class: "btn btn-large btn-primary") %>
       <% end %>
     </dl>
   </div>
