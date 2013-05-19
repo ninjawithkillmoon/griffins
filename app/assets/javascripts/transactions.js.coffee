@@ -11,3 +11,7 @@ jQuery ->
   )
   
   jQuery("#transaction_method").select2()
+
+  jQuery("#transaction_paid_at_1i").select2()
+  jQuery("#transaction_paid_at_2i").select2()
+  jQuery("#transaction_paid_at_3i").select2()

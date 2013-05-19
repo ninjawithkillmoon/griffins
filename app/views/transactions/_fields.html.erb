@@ -8,6 +8,13 @@
 </div>
 
 <div class="control-group">
+  <%= f.label :paid_at, "Payment Date", class: "control-label" %>
+  <div class="controls">
+    <%= f.date_select :paid_at, {start_year: 2010, end_year: Time.now.year, include_blank: false, date_separator: "<span class='nwkm_dateSelectorSeparator'>/ </span>"}, {class: "nwkm_dateSelector"} %>
+  </div>
+</div>
+
+<div class="control-group">
   <%= f.label :category_id, class: "control-label" %>
   <div class="controls">
     <%= f.select :category_id, @categories_with_parents.collect { |category| ["#{category.parent.name} - #{category.name}", category.id] }, {}, {class: "fill"} %>
@@ -24,7 +31,7 @@
 <div class="control-group">
   <%= f.label :amount_dollars, "Amount", class: "control-label" %>
   <div class="controls">
-    <%= f.number_field :amount_dollars, {step: 0.01, min: 0.00} %>
+    <%= f.number_field :amount_dollars, {step: 0.01, min: 0.00, value: 0.00} %>
   </div>
 </div>
 

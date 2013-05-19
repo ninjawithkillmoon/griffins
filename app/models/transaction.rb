@@ -14,7 +14,7 @@
 #
 
 class Transaction < ActiveRecord::Base
-  attr_accessible :amount, :amount_dollars, :credit, :method, :notes, :invoice_id, :category_id
+  attr_accessible :amount, :amount_dollars, :credit, :method, :notes, :invoice_id, :category_id, :paid_at
 
   belongs_to :invoice
   belongs_to :category, class_name: "TransactionCategory"
@@ -44,6 +44,11 @@ class Transaction < ActiveRecord::Base
 
   validates(:credit, {
       inclusion: {in: [true, false]},
+    }
+  )
+
+  validates(:paid_at, {
+      presence: true,
     }
   )
 
