@@ -3,22 +3,24 @@ module Financial
   class FinancialReport
     @sectionsRevenue = {}
     @sectionsExpense = {}
+    @sectionsCombined = {}
 
     def initialize
       @sectionsRevenue = {}
       @sectionsExpense = {}
+      @sectionsCombined = {}
     end
 
     def addTransaction(p_parent, p_category, p_amount)
-      if sections(p_amount)[p_parent].nil?
+      section = sections_by_amount(p_amount)[p_parent]
 
+      if section.nil?
         section = FinancialReportSection.new(p_parent, p_amount >= 0.0)
-        section.addTransaction(p_category, p_amount)
-
-        sections(p_amount)[p_parent] = section
-      else
-        sections(p_amount)[p_parent].addTransaction(p_category, p_amount)
       end
+
+      section.addTransaction(p_category, p_amount)
+
+      save_section(section)
     end
 
     # Checks that the section is the right type (revenue / expense) for the given amount.
@@ -46,6 +48,10 @@ module Financial
       @sectionsExpense
     end
 
+    def sectionsCombined
+      @sectionsCombined
+    end
+
     private #----------------------------------------------
 
     # Returns either @sectionsRevenue or @sectionsExpense depending on whether
@@ -56,11 +62,29 @@ module Financial
     # * *Returns* :
     #   - 
     #
-    def sections(p_amount)
+    def sections_by_amount(p_amount)
       if p_amount >= 0.0
         return @sectionsRevenue
       else
         return @sectionsExpense
+      end
+    end
+
+    def sections(p_revenue)
+      if p_revenue
+        return @sectionsRevenue
+      else
+        return @sectionsExpense
+      end
+    end
+
+    def save_section(p_section)
+      sections(p_section.revenue?)[p_section.name] = p_section
+
+      if p_section.expense?
+        @sectionsCombined["#{p_section.name}_expense"] = p_section
+      elsif p_section.revenue?
+        @sectionsCombined["#{p_section.name}_revenue"] = p_section
       end
     end
   end

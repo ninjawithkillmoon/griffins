@@ -48,6 +48,15 @@ module Financial
     def expense?
       !@revenue
     end
+
+    def row_class
+      case @revenue
+      when true
+        return "success"
+      when false
+        return "error"
+      end
+    end
   end
 
 end

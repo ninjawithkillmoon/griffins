@@ -3,12 +3,23 @@ class ReportsController < ApplicationController
   before_filter :signed_in_user
 
   def financial
+    validate_input
     fetch_transactions
     calculate_balances
     make_report
   end
 
   private # ----------------------------------------------------------
+
+  def validate_input
+    if params[:date_start].nil?
+      params[:date_start] = Date.today.beginning_of_year
+    end
+
+    if params[:date_end].nil?
+      params[:date_end] = Date.today.end_of_year
+    end
+  end
 
   def fetch_transactions
     @transactionsDuring = Transaction.after_inclusive(params[:date_start])
@@ -38,4 +49,5 @@ class ReportsController < ApplicationController
       @report.addTransaction(t.category.parent.name, t.category.name, t.amount_dollars)
     end
   end
+
 end

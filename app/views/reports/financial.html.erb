@@ -28,39 +28,20 @@
     <th>Category</th>
     <th>Revenue / Expense</th>
   </tr>
-  <% @report.sectionsRevenue.each do |name, section| %>
+  <% @report.sectionsCombined.keys.sort.each do |key| %>
+    <% section = @report.sectionsCombined[key] %>
     <tr class="info">
-      <td><strong>Revenue for <%= name %></strong></td>
+      <td><strong><%= section.revenue? ? "Revenue" : "Expenses" %> for <%= section.name %></strong></td>
       <td></td>
     </tr>
     <% section.lines.each do |name, amount| %>
-      <tr class="success">
+      <tr class="<%= section.row_class %>">
         <td><%= name %></td>
         <td><%= amount %></td>
       <tr>
     <% end %>
-    <tr class="success">
-      <td><strong>Total revenue for <%= name %></strong></td>
-      <td><strong><%= section.total %></strong></td>
-    </tr>
-    <tr>
-      <td></td>
-      <td></td>
-    </tr>
-  <% end %>
-  <% @report.sectionsExpense.each do |name, section| %>
-    <tr class="info">
-      <td><strong>Expenses for <%= name %></strong></td>
-      <td></td>
-    </tr>
-    <% section.lines.each do |name, amount| %>
-      <tr class="error">
-        <td><%= name %></td>
-        <td><%= amount %></td>
-      <tr>
-    <% end %>
-    <tr class="error">
-      <td><strong>Total expense for <%= name %></strong></td>
+    <tr class="<%= section.row_class %>">
+      <td><strong>Total revenue for <%= section.name %></strong></td>
       <td><strong><%= section.total %></strong></td>
     </tr>
     <tr>
