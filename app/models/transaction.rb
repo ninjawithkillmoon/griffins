@@ -20,7 +20,11 @@ class Transaction < ActiveRecord::Base
   belongs_to :category, class_name: "TransactionCategory"
 
   before_save do |transaction|
-    unless transaction.credit?
+    if transaction.credit? && transaction.amount < 0
+      transaction.amount = 0 - transaction.amount
+    end
+
+    if transaction.debit? && transaction.amount > 0
       transaction.amount = 0 - transaction.amount
     end
   end
@@ -77,6 +81,10 @@ class Transaction < ActiveRecord::Base
     else
       return "debit"
     end
+  end
+
+  def debit?
+    return !credit?
   end
 
   def self.after(p_date)
