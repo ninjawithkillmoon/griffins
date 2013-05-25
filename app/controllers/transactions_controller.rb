@@ -78,6 +78,6 @@ class TransactionsController < ApplicationController
   end
 
   def fetch_categories_with_parents
-    @categories_with_parents = TransactionCategory.where("parent_id IS NOT NULL")
+    @categories_with_parents = TransactionCategory.where("parent_id IS NOT NULL").includes(:parent).sort_by! { |cat| [cat.parent.name, cat.name] }
   end
 end
