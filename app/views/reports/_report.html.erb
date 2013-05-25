@@ -1,7 +1,7 @@
 <div>
   <h1>Adelaide University Basketball Club</h1>
   <h3 class="center">Statement of Financial Performance</h3>
-  <h2>Period from <%= l params[:date_start], format: :long %> to <%= l params[:date_end], format: :long %></h2>
+  <h2>Period from <%= l params[:date_start].to_date, format: :long %> to <%= l params[:date_end].to_date, format: :long %></h2>
 </div>
 
 <table class="table">
