@@ -1,0 +1,61 @@
+<div>
+  <h1>Adelaide University Basketball Club</h1>
+  <h3 class="center">Statement of Financial Performance</h3>
+  <h2>Period from <%= l params[:date_start], format: :long %> to <%= l params[:date_end], format: :long %></h2>
+</div>
+
+<table class="table">
+  <% unless @hideBalance %>
+    <tr class="dark">
+      <td><strong>Opening Balance</strong></td>
+      <td><strong><%= @balanceBefore %></strong></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td></td>
+    </tr>
+  <% end %>
+  <tr class="border-thick-top">
+    <td></td>
+    <td><strong>Revenue / Expense</strong></td>
+  </tr>
+  <% @report.sectionsCombined.keys.sort.each do |key| %>
+    <% section = @report.sectionsCombined[key] %>
+    <tr class="info">
+      <td><strong><%= section.revenue? ? "Revenue" : "Expenses" %> for <%= section.name %></strong></td>
+      <td></td>
+    </tr>
+    <% section.lines.each do |name, amount| %>
+      <tr class="<%= section.row_class %>">
+        <td><%= name %></td>
+        <td><%= amount %></td>
+      <tr>
+    <% end %>
+    <tr class="<%= section.row_class %> border-thick-top">
+      <td><strong>Total revenue for <%= section.name %></strong></td>
+      <td><strong><%= section.total %></strong></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td></td>
+    </tr>
+  <% end %>
+  <tr class="<%= @balanceDiff >= 0 ? 'success' : 'error' %> border-thick-horizontal">
+    <td><strong>Profit / Loss</strong></td>
+    <td><strong><%= @balanceDiff %></strong></td>
+  </tr>
+  <% unless @hideBalance %>
+    <tr>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr class="dark">
+      <td><strong>Closing Balance</strong></td>
+      <td><strong><%= @balanceAfter %></strong></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td></td>
+    </tr>
+  <% end %>
+</table>

@@ -19,6 +19,8 @@ class ReportsController < ApplicationController
     if params[:date_end].nil?
       params[:date_end] = Date.today.end_of_year
     end
+
+    @hideBalance = params[:hide_balance] == "true"
   end
 
   def fetch_transactions
@@ -40,6 +42,8 @@ class ReportsController < ApplicationController
     @transactionsDuring.each do |t|
       @balanceAfter += t.amount_dollars
     end
+
+    @balanceDiff = @balanceAfter - @balanceBefore
   end
 
   def make_report
