@@ -15,3 +15,15 @@ jQuery ->
   jQuery("#transaction_paid_at_1i").select2()
   jQuery("#transaction_paid_at_2i").select2()
   jQuery("#transaction_paid_at_3i").select2()
+
+  jQuery("#transaction_credit").change(update_credit_colour)
+
+  update_credit_colour()
+
+update_credit_colour = () ->
+  if jQuery("#transaction_credit").val() == "true"
+    jQuery("#transaction_credit").toggleClass("errorColour", false)
+    jQuery("#transaction_credit").toggleClass("successColour", true)
+  else
+    jQuery("#transaction_credit").toggleClass("errorColour", true)
+    jQuery("#transaction_credit").toggleClass("successColour", false)
