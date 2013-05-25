@@ -4,7 +4,7 @@
   <td><%= invoice.season.nil? ? "" : link_to(invoice.season.name, invoice.season) %></td>
   <td><%= number_to_currency invoice.amount_dollars %></td>
   <td><%= number_to_currency invoice.outstanding_dollars %></td>
-  <td><%= truncate invoice.notes %></td>
+  <td><a class="nolink" rel="tooltip" title="<%= invoice.notes %>"><%= truncate invoice.notes %></a></td>
 
   <% if admin? %>
     <td>
