@@ -5,6 +5,7 @@
     <dl class="dl-horizontal">
       <%= dtdd 'Name', @season.name %>
       <%= dtdd 'Start Date', l(@season.date_start, format: :medium) %>
+      <%= dtdd 'End Date', l(@season.date_end, format: :medium) %>
       <%= dtdd 'Cost', number_to_currency(@season.cost_dollars) %>
       <%= dtdd 'Student Cost', number_to_currency(@season.cost_student_dollars) %>
       <%= dtdd 'Competition', (@season.competition.nil? ? raw("&nbsp;") : link_to(@season.competition.name, @season.competition)) %>

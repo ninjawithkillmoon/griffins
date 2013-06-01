@@ -23,7 +23,7 @@ class Team < ActiveRecord::Base
         invoice = Invoice.where({player_id: player.id, season_id: team.division.season.id}).first
 
         cost = team.division.season.cost
-        unless player.student_number.blank?
+        unless player.student_number_if_student.blank?
           cost = team.division.season.cost_student
         end
 

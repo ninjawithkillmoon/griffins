@@ -1,0 +1,14 @@
+<% provide(:title, 'Membership Report') %>
+
+<div id="nwkm_filters">
+  <%= form_tag 'membership', method: :get do %>
+    <%= select_tag :season_id, options_from_collection_for_select(@seasons, :id, :name, params[:season_id]), {class: "span3"} %>
+    <%= select_tag :status, options_for_select(membership_types, params[:status]), {class: "span2"} %>
+
+    <%= button_tag type: :submit, class: "btn" do %>
+      <i class="icon-search icon-white"></i> Search
+    <% end %>
+  <% end %>
+</div>
+
+<%= render 'report_membership' %>

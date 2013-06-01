@@ -6,7 +6,7 @@
       <%= dtdd 'Name', full_name(@player) %>
       <%= dtdd 'Sex', sex_string(@player.sex) %>
       <%= dtdd 'Email', (@player.email.blank? ? raw('&nbsp;') : mail_to(@player.email, nil, encode: "javascript")) %>
-      <%= dtdd 'Student ID', @player.student_number %>
+      <%= dtdd 'Student ID', @player.student_number_if_student %>
       <%= dtdd 'Date of Birth', (@player.date_of_birth.blank? ? raw('&nbsp;') : "#{l(@player.date_of_birth, format: :long)} (#{age(@player.date_of_birth)})") %>
       <%= dtdd 'Number', @player.number %>
       <% if admin? %>

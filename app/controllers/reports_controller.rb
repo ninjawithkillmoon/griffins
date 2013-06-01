@@ -3,15 +3,22 @@ class ReportsController < ApplicationController
   before_filter :signed_in_user
 
   def financial
-    validate_input
+    validate_input_financial
     fetch_transactions
     calculate_balances
     make_report
   end
 
+  def membership
+    fetch_seasons
+    validate_input_membership
+    fetch_season
+    fetch_invoices
+  end
+
   private # ----------------------------------------------------------
 
-  def validate_input
+  def validate_input_financial
     if params[:date_start].nil?
       params[:date_start] = Date.today.beginning_of_year
     end
@@ -23,11 +30,41 @@ class ReportsController < ApplicationController
     @hideBalance = params[:hide_balance] == "true"
   end
 
+  def validate_input_membership
+    #bare layout
+
+    if params[:status].nil?
+      params[:status] = :all
+    end
+
+    if params[:season_id].nil?
+      params[:season_id] = @seasons.first.id
+    end
+
+    @status = params[:status]
+  end
+
   def fetch_transactions
     @transactionsDuring = Transaction.after_inclusive(params[:date_start])
                                      .before_inclusive(params[:date_end])
 
     @transactionsBefore = Transaction.before(params[:date_start])
+  end
+
+  #def fetch_players
+  #  @players = Player.joins({:teams => {:division => :season}}).where("season_id = ?", @season_id).order("name_family ASC, name_given ASC")
+  #end
+
+  def fetch_seasons
+    @seasons = Season.order("date_start DESC")
+  end
+
+  def fetch_season
+    @season = Season.find(params[:season_id])
+  end
+
+  def fetch_invoices
+    @invoices = Invoice.joins(:player).where("season_id = ?", @season.id).order("players.name_family, players.name_given")
   end
 
   def calculate_balances

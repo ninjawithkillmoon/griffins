@@ -13,7 +13,7 @@
 #
 
 class Season < ActiveRecord::Base
-  attr_accessible :cost, :cost_dollars, :cost_student, :cost_student_dollars, :date_start, :name, :competition_id, :division_ids
+  attr_accessible :cost, :cost_dollars, :cost_student, :cost_student_dollars, :date_start, :date_end, :name, :competition_id, :division_ids
 
   has_many :divisions
   has_many :invoices
@@ -26,6 +26,11 @@ class Season < ActiveRecord::Base
   )
 
   validates(:date_start, {
+      presence: true
+    }
+  )
+
+  validates(:date_end, {
       presence: true
     }
   )

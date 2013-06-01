@@ -36,6 +36,13 @@
 </div>
 
 <div class="control-group">
+  <%= f.label :student_ceased, class: "control-label" %>
+  <div class="controls">
+    <%= f.check_box :student_ceased %>
+  </div>
+</div>
+
+<div class="control-group">
   <%= f.label :date_of_birth, "Date of Birth", class: "control-label" %>
   <div class="controls">
     <%= f.date_select :date_of_birth, {start_year: 1950, end_year: Time.now.year, include_blank: true, date_separator: "<span class='nwkm_dateSelectorSeparator'>/ </span>"}, {class: "nwkm_dateSelector"} %>

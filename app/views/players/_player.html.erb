@@ -3,7 +3,7 @@
   <td><%= link_to player.name_given, player %></td>
   <td><%= sex_string(player.sex) %></td>
   <td><%= mail_to(player.email, nil, encode: "javascript") %></td>
-  <td><%= player.student_number %></td>
+  <td><%= player.student_number_if_student %></td>
   <!--<td><%= l(player.date_of_birth, format: :long) unless player.date_of_birth.nil? %></td>-->
   <td><%= player.number %></td>
   <% if admin? %>

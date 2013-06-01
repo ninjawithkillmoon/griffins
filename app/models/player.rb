@@ -15,7 +15,7 @@
 #
 
 class Player < ActiveRecord::Base
-  attr_accessible :date_of_birth, :email, :sex, :name_family, :name_given, :student_number, :number, :team_ids
+  attr_accessible :date_of_birth, :email, :sex, :name_family, :name_given, :student_number, :student_ceased, :number, :team_ids
 
   has_and_belongs_to_many :teams
   has_many :invoices
@@ -51,4 +51,18 @@ class Player < ActiveRecord::Base
     return name_given + " " + name_family
   end
 
+  # Returns the player's student number when student_ceased is false, empty string otherwise.
+  #
+  # * *Args*    :
+  #   - ++ -> 
+  # * *Returns* :
+  #   - 
+  #
+  def student_number_if_student
+    unless student_ceased
+      return student_number
+    end
+
+    return ""
+  end
 end

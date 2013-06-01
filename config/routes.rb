@@ -12,7 +12,8 @@ NwkmGriffins::Application.routes.draw do
 
   root to: 'static_pages#home'
 
-  match 'reports/financial', to: 'reports#financial'
+  match '/reports/financial',  to: 'reports#financial'
+  match '/reports/membership', to: 'reports#membership'
   
   match '/about',   to: 'static_pages#about'
   match '/contact', to: 'static_pages#contact'
