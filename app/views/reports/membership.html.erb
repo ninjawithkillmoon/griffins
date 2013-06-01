@@ -11,4 +11,8 @@
   <% end %>
 </div>
 
+<div id="nwkm_links">
+  <span>Download as <%= link_to 'CSV', membership_path(params.merge({format: :csv})) %> | <%= link_to 'PDF', membership_path(params.merge({format: :pdf})) %></span>
+</div>
+
 <%= render 'report_membership' %>

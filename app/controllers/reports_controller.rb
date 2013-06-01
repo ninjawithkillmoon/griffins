@@ -1,4 +1,5 @@
 class ReportsController < ApplicationController
+  include ReportsHelper
 
   before_filter :signed_in_user
 
@@ -7,6 +8,8 @@ class ReportsController < ApplicationController
     fetch_transactions
     calculate_balances
     make_report
+
+    add_breadcrumb 'Financial Report', '/reports/financial'
   end
 
   def membership
@@ -14,6 +17,14 @@ class ReportsController < ApplicationController
     validate_input_membership
     fetch_season
     fetch_invoices
+
+    add_breadcrumb 'Membership Report', '/reports/membership'
+
+    respond_to do |format|
+      format.html
+      format.csv { send_data membership_csv(@invoices) }
+      format.pdf {  }
+    end
   end
 
   private # ----------------------------------------------------------
@@ -64,7 +75,15 @@ class ReportsController < ApplicationController
   end
 
   def fetch_invoices
-    @invoices = Invoice.joins(:player).where("season_id = ?", @season.id).order("players.name_family, players.name_given")
+    invoices_all = Invoice.joins(:player).where("season_id = ?", @season.id).order("players.name_family, players.name_given")
+
+    @invoices = []
+
+    invoices_all.each do |invoice|
+      if check_financial_status @status, invoice
+        @invoices.push invoice
+      end
+    end
   end
 
   def calculate_balances
