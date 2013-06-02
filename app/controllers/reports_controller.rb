@@ -23,7 +23,6 @@ class ReportsController < ApplicationController
     respond_to do |format|
       format.html
       format.csv { send_data membership_csv(@invoices) }
-      format.pdf {  }
     end
   end
 
@@ -78,17 +77,33 @@ class ReportsController < ApplicationController
     invoices_all = Invoice.joins(:player).where("season_id = ?", @season.id).order("players.name_family, players.name_given")
 
     @invoices = []
-    @countStudent = 0
+
+    @countMale = 0
+    @countFemale = 0
+
+    @countStudentMale = 0
+    @countStudentFemale = 0
 
     invoices_all.each do |invoice|
       if check_financial_status @status, invoice
         @invoices.push invoice
 
-        unless invoice.player.student_number_if_student.blank?
-          @countStudent += 1
+        if invoice.player.male?
+          @countMale += 1
+          if invoice.player.student?
+            @countStudentMale += 1
+          end
+        else
+          @countFemale += 1
+          if invoice.player.student?
+            @countStudentFemale += 1
+          end
         end
       end
     end
+
+    @countTotal = @countMale + @countFemale
+    @countStudentTotal = @countStudentMale + @countStudentFemale
   end
 
   def calculate_balances
@@ -112,6 +127,14 @@ class ReportsController < ApplicationController
 
     @transactionsDuring.each do |t|
       @report.addTransaction(t.category.parent.name, t.category.name, t.amount_dollars)
+    end
+  end
+
+  def determine_layout
+    if params[:action] == 'membership' && params[:format] == :pdf
+      return 'application'
+    else
+      return 'application'
     end
   end
 

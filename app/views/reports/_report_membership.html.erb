@@ -2,8 +2,37 @@
   <h1>Adelaide University Basketball Club</h1>
   <h3 class="center">Membership for season: <%= @season.name %></h3>
   <h2>From <%= l @season.date_start, format: :medium %> to <%= l @season.date_end, format: :medium %></h2>
-  <p class="center">Members: <%= @invoices.count %></p>
-  <p class="center">Students: <%= @countStudent %> (<%= number_to_percentage (100.0 * @countStudent / @invoices.count), precision: 2 %>)</p>
+</div>
+
+<div class="row">
+  <div class="span3">&nbsp;</div>
+  <table class="table table-bordered table-hover span6 center">
+    <tr class="dark">
+      <th></th>
+      <th>Members</th>
+      <th>Students</th>
+      <th>Percentage</th>
+    </tr>
+    <tr>
+      <td><strong>Total</strong></td>
+      <td><%= @countTotal %></td>
+      <td><%= @countStudentTotal %></td>
+      <td><%= number_to_percentage (100.0 * @countStudentTotal / @countTotal), precision: 2 %></td>
+    </tr>
+    <tr>
+      <td><strong>Male</strong></td>
+      <td><%= @countMale %></td>
+      <td><%= @countStudentMale %></td>
+      <td><%= number_to_percentage (100.0 * @countStudentMale / @countMale), precision: 2 %></td>
+    </tr>
+    <tr>
+      <td><strong>Female</strong></td>
+      <td><%= @countFemale %></td>
+      <td><%= @countStudentFemale %></td>
+      <td><%= number_to_percentage (100.0 * @countStudentFemale / @countFemale), precision: 2 %></td>
+    </tr>
+  </table>
+  <div class="span3">&nbsp;</div>
 </div>
 
 <table class="table table-bordered">
@@ -16,7 +45,7 @@
   </tr>
   <% @invoices.each do |invoice| %>
     <% player = invoice.player %>
-    <tr class="<%= player.student_number_if_student.blank? ? '' : 'dark' %>">
+    <tr class="<%= player.student? ? 'dark' : '' %>">
       <td><%= player.sex_string %></td>
       <td><%= player.name_family %></td>
       <td><%= player.name_given %></td>

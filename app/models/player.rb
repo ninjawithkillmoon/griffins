@@ -57,9 +57,25 @@ class Player < ActiveRecord::Base
       return "Male"
     when SEX_FEMALE
       return "Female"
-    when SEX_MIXED
-      return "Mixed"
     end
+
+    return nil
+  end
+
+  def male?
+    if sex == SEX_MALE
+      return true
+    end
+
+    return false
+  end
+
+  def female?
+    if sex == SEX_FEMALE
+      return true
+    end
+
+    return false
   end
 
   # Returns the player's student number when student_ceased is false, empty string otherwise.
@@ -75,5 +91,9 @@ class Player < ActiveRecord::Base
     end
 
     return ""
+  end
+
+  def student?
+    return !student_number_if_student.blank?
   end
 end
