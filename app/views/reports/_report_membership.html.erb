@@ -2,24 +2,26 @@
   <h1>Adelaide University Basketball Club</h1>
   <h3 class="center">Membership for season: <%= @season.name %></h3>
   <h2>From <%= l @season.date_start, format: :medium %> to <%= l @season.date_end, format: :medium %></h2>
+  <p class="center">Members: <%= @invoices.count %></p>
+  <p class="center">Students: <%= @countStudent %> (<%= number_to_percentage (100.0 * @countStudent / @invoices.count), precision: 2 %>)</p>
 </div>
 
 <table class="table table-bordered">
   <tr>
+    <th>Sex</th>
     <th>Family Name</th>
     <th>Given Name</th>
     <th>Email</th>
     <th>Student Number</th>
   </tr>
   <% @invoices.each do |invoice| %>
-    <% if check_financial_status @status, invoice %>
-      <% player = invoice.player %>
-      <tr class="<%= player.student_number_if_student.blank? ? '' : 'dark' %>">
-        <td><%= player.name_family %></td>
-        <td><%= player.name_given %></td>
-        <td><%= player.email %></td>
-        <td><%= player.student_number_if_student %></td>
-      </tr>
-    <% end %>
+    <% player = invoice.player %>
+    <tr class="<%= player.student_number_if_student.blank? ? '' : 'dark' %>">
+      <td><%= player.sex_string %></td>
+      <td><%= player.name_family %></td>
+      <td><%= player.name_given %></td>
+      <td><%= player.email %></td>
+      <td><%= player.student_number_if_student %></td>
+    </tr>
   <% end %>
 </table>

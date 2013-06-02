@@ -78,10 +78,15 @@ class ReportsController < ApplicationController
     invoices_all = Invoice.joins(:player).where("season_id = ?", @season.id).order("players.name_family, players.name_given")
 
     @invoices = []
+    @countStudent = 0
 
     invoices_all.each do |invoice|
       if check_financial_status @status, invoice
         @invoices.push invoice
+
+        unless invoice.player.student_number_if_student.blank?
+          @countStudent += 1
+        end
       end
     end
   end

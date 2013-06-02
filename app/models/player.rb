@@ -51,6 +51,17 @@ class Player < ActiveRecord::Base
     return name_given + " " + name_family
   end
 
+  def sex_string
+    case sex
+    when SEX_MALE
+      return "Male"
+    when SEX_FEMALE
+      return "Female"
+    when SEX_MIXED
+      return "Mixed"
+    end
+  end
+
   # Returns the player's student number when student_ceased is false, empty string otherwise.
   #
   # * *Args*    :
