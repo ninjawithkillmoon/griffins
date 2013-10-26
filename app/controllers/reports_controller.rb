@@ -32,11 +32,13 @@ class ReportsController < ApplicationController
     fetch_players
     fetch_spare_unfiforms
 
+    make_uniforms
+
     add_breadcrumb 'Uniform Numbers Report', '/reports/uniform_numbers'
 
     respond_to do |format|
       format.html
-      format.csv { send_data uniform_numbers_csv(@players, @spare_uniforms) }
+      format.csv { send_data uniform_numbers_csv(@uniforms) }
     end
   end
 
@@ -154,4 +156,12 @@ class ReportsController < ApplicationController
     end
   end
 
+  def make_uniforms
+    @uniforms = Hash.new  
+
+    for number in 0..99
+        @uniforms[number] =  @players.select{ |player| player.number == number }.map{ |player| player.full_name }
+                             .concat(@spare_uniforms.select{ |spare| spare.number == number }.map{ |spare| "Spare Uniform" })
+      end
+  end
 end

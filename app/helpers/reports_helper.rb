@@ -30,14 +30,12 @@ module ReportsHelper
     end
   end
 
-  def uniform_numbers_csv(p_players, p_spare_uniforms, p_options = {})
+  def uniform_numbers_csv(p_uniforms, p_options = {})
     CSV.generate(p_options) do |csv|
       csv << ['Number', 'Player', 'Additional Player', 'Additional Player']
 
-      for number in 0..99
-        csv << [number]
-               .concat(p_players.select{ |player| player.number == number }.map{ |player| player.full_name })
-               .concat(p_spare_uniforms.select{ |spare| spare.number == number }.map{ |spare| "Spare Uniform" })
+      p_uniforms.each do |number, uniforms|
+        csv << [number].concat(uniforms)
       end
     end
   end
