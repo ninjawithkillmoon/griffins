@@ -74,7 +74,7 @@ class ReportsController < ApplicationController
   end
 
   def fetch_invoices
-    invoices_all = Invoice.joins(:player).where("season_id = ?", @season.id).order("players.name_family, players.name_given")
+    invoices_all = Invoice.includes(:player).joins(:player).where("season_id = ?", @season.id).order("players.name_family, players.name_given")
 
     @invoices = []
 
