@@ -1,5 +1,6 @@
 <tr>
   <td><%= link_to spare_uniform.number, spare_uniform %></td>
+  <td><%= spare_uniform.sex_string %></td>
   <td><%= spare_uniform.size %></td>
   <% if admin? %>
     <td><%= link_to raw('<i class="icon-edit icon-white"></i> Edit'), edit_spare_uniform_path(spare_uniform), {class: "btn btn-warning"} %></td>

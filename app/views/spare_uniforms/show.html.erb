@@ -5,6 +5,7 @@
     <dl class="dl-horizontal">
       <%= dtdd 'Number', @spare_uniform.number %>
       <%= dtdd 'Size', @spare_uniform.size %>
+      <%= dtdd 'Sex', @spare_uniform.sex_string %>
       
       <% if admin? %>
         <%= dtdd '', link_to(raw("<i class='icon-edit'></i> Edit"), edit_spare_uniform_path(@spare_uniform), class: "btn btn-large btn-warning") %>
