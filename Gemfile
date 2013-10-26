@@ -5,6 +5,7 @@ gem 'jquery-rails'
 gem 'bcrypt-ruby', '3.0.1'
 gem 'rails_config'
 gem 'formatted_rails_logger'
+gem "therubyracer"
 gem 'twitter-bootstrap-rails'
 gem 'faker'
 gem 'will_paginate'
