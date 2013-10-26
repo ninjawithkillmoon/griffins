@@ -1,0 +1,16 @@
+<table class="table table-bordered">
+  <tr>
+    <th>Number</th>
+    <th>Name</th>
+    <th>Additional Name</th>
+    <th>Additional Name</th>
+  </tr>
+  <% @players.each do |player| %>
+    <tr class="<%= player.student? ? 'dark' : '' %>">
+      <td><%= player.number %></td>
+      <td><%= player.full_name %></td>
+      <td></td>
+      <td></td>
+    </tr>
+  <% end %>
+</table>

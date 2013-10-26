@@ -1,0 +1,17 @@
+<% provide(:title, 'Uniform Numbers') %>
+
+<div class="nwkm_filters">
+  <%= form_tag 'uniform_numbers', method: :get do %>
+    <%= select_tag :sex, options_for_select(sex_types_player, params[:sex]), {include_blank: true, class: "span2"} %>
+
+    <%= button_tag type: :submit, class: "btn" do %>
+      <i class="icon-search icon-white"></i> Search
+    <% end %>
+  <% end %>
+</div>
+
+<div class="nwkm_links">
+  <span>Download as <%= link_to 'CSV', uniform_numbers_path(params.merge({format: :csv})) %></span>
+</div>
+
+<%= render 'report_uniform_numbers' %>
