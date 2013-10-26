@@ -1,0 +1,15 @@
+<%= render 'shared/error_messages', resource: @spare_uniform %>
+
+<div class="control-group">
+  <%= f.label :number, class: "control-label" %>
+  <div class="controls">
+    <%= f.number_field :number, {step: 1, max: 99} %>
+  </div>
+</div>
+
+<div class="control-group">
+  <%= f.label :size, "Size", class: "control-label" %>
+  <div class="controls">
+    <%= f.text_field :size %>
+  </div>
+</div>

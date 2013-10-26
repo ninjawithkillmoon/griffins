@@ -1,0 +1,21 @@
+<% provide(:title, "Spare Uniform #{@spare_uniform.number}") %> 
+<% provide(:titleSmall, "Edit") %>
+
+<div class="row">
+  <div class="span6 offset3">
+    <%= form_for(@spare_uniform, html: {class: "form-horizontal well"}) do |f| %>
+      
+      <%=render 'fields', f: f %>
+
+      <div class="form-actions">
+        <%= button_tag(type: :submit, class: "btn btn-large btn-success") do %>
+          <i class='icon-ok'></i> Save changes
+        <% end %>
+        <%= link_to raw("<i class='icon-remove'></i> Cancel"), @spare_uniform, class: "btn btn-large" %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<% provide :leftNavButtonBody, 'Spare Uniforms' %>
+<% provide :leftNavButtonUrl, spare_uniforms_path %>

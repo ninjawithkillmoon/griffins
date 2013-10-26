@@ -20,8 +20,8 @@ module ReportsHelper
     return false
   end
 
-  def membership_csv(p_invoices, options = {})
-    CSV.generate(options) do |csv|
+  def membership_csv(p_invoices, p_options = {})
+    CSV.generate(p_options) do |csv|
       csv << ['Sex', 'Family Name', 'Given Name', 'Email', 'Student Number']
       
       p_invoices.each do |invoice|
@@ -30,12 +30,14 @@ module ReportsHelper
     end
   end
 
-  def uniform_numbers_csv(p_players, options = {})
-    CSV.generate(options) do |csv|
+  def uniform_numbers_csv(p_players, p_spare_uniforms, p_options = {})
+    CSV.generate(p_options) do |csv|
       csv << ['Number', 'Player', 'Additional Player', 'Additional Player']
 
       for number in 0..99
-        csv << [number].concat(p_players.select{ |player| player.number == number }.map{ |player| player.full_name })
+        csv << [number]
+               .concat(p_players.select{ |player| player.number == number }.map{ |player| player.full_name })
+               .concat(p_spare_uniforms.select{ |spare| spare.number == number }.map{ |spare| "Spare Uniform" })
       end
     end
   end

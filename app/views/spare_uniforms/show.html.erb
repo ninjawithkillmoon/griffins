@@ -1,0 +1,17 @@
+<% provide(:title, "Spare Uniform #{@spare_uniform.number}") %> 
+
+<div class="row">
+  <div class="span4 offset4">
+    <dl class="dl-horizontal">
+      <%= dtdd 'Number', @spare_uniform.number %>
+      <%= dtdd 'Size', @spare_uniform.size %>
+      
+      <% if admin? %>
+        <%= dtdd '', link_to(raw("<i class='icon-edit'></i> Edit"), edit_spare_uniform_path(@spare_uniform), class: "btn btn-large btn-warning") %>
+      <% end %>
+    </dl>
+  </div>
+</div>
+
+<% provide :leftNavButtonBody, 'Spare Uniforms' %>
+<% provide :leftNavButtonUrl, spare_uniforms_path %>

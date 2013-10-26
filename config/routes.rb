@@ -1,4 +1,7 @@
 NwkmGriffins::Application.routes.draw do
+  resources :spare_uniforms
+
+
   resources :users
   resources :players
   resources :teams

@@ -30,12 +30,13 @@ class ReportsController < ApplicationController
     validate_input_uniform_numbers
 
     fetch_players
+    fetch_spare_unfiforms
 
     add_breadcrumb 'Uniform Numbers Report', '/reports/uniform_numbers'
 
     respond_to do |format|
       format.html
-      format.csv { send_data uniform_numbers_csv(@players) }
+      format.csv { send_data uniform_numbers_csv(@players, @spare_uniforms) }
     end
   end
 
@@ -82,6 +83,10 @@ class ReportsController < ApplicationController
 
   def fetch_players
     @players = Player.active(:true).with_sex(params[:sex]).has_number.order(:number)
+  end
+
+  def fetch_spare_unfiforms
+    @spare_uniforms = SpareUniform.all
   end
 
   def fetch_seasons

@@ -81,6 +81,16 @@ en:
     ID %{id}
     %{name}
 
+  # SPARE UNIFORMS
+  spare_uniform_created: Spare uniform created
+  spare_uniform_updated: Spare uniform updated
+  spare_uniform_deleted: Spare uniform deleted
+  confirm_spare_uniform_delete: |+
+    Are you sure you want to delete the following spare_uniform:
+
+    ID %{id}
+    %{number}
+
   # INVOICES
   invoice_created: Invoice created
   invoice_updated: Invoice updated

@@ -1,0 +1,7 @@
+<tr>
+  <td><%= link_to spare_uniform.number, spare_uniform %></td>
+  <% if admin? %>
+    <td><%= link_to raw('<i class="icon-edit icon-white"></i> Edit'), edit_spare_uniform_path(spare_uniform), {class: "btn btn-warning"} %></td>
+    <td><%= link_to raw('<i class="icon-trash icon-white"></i> Delete'), spare_uniform, class: "btn btn-danger", method: :delete, data: { confirm: t(:confirm_spare_uniform_delete, {id: spare_uniform.id, number: spare_uniform.number}) } %></td>
+  <% end %>
+</tr>
