@@ -1,5 +1,17 @@
 <% provide(:title, 'All Players') %>
 
+<div id="nwkm_filters">
+  <%= form_tag players_path, method: :get do %>
+    <%= select_tag :id, options_from_collection_for_select(@players_all, :id, :full_name, params[:id]), {include_blank: true, class: "span3"} %>
+    <%= select_tag :season_id, options_from_collection_for_select(@seasons, :id, :name, params[:season_id]), {include_blank: true, class: "span3"} %>
+    <%= select_tag :active, options_for_select({"Active" => :true, "Inactive" => :false}, params[:active]), {include_blank: true, class: "span2"} %>
+    <%= select_tag :sex, options_for_select(sex_types_player, params[:sex]), {include_blank: true, class: "span2"} %>
+    <%= button_tag type: :submit, class: "btn" do %>
+      <i class="icon-search icon-white"></i> Search
+    <% end %>
+  <% end %>
+</div>
+
 <% if admin? %>
   <% provide :actions, link_to(raw('<i class="icon-plus icon-white"></i> New Player'), new_player_path, class: "btn btn-large btn-primary") %>
   <% provide :actions, link_to(raw('<i class="icon-upload icon-white"></i> Import Players'), new_player_path(active: "import"), class: "btn btn-large btn-primary") %>

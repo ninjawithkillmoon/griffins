@@ -7,9 +7,17 @@ class PlayersController < ApplicationController
   add_breadcrumb "Players", :players_path
 
   def index
-    fetch_players
+    fetch_player
 
-    @total = @players.total_entries
+    if @player
+      redirect_to @player
+    else
+      fetch_players
+      fetch_players_all # used for the player selector in the search filters
+      fetch_seasons
+
+      @total = @players.total_entries
+    end
   end
 
   def show
@@ -70,17 +78,24 @@ class PlayersController < ApplicationController
   private # ----------------------------------------------------------
 
   def fetch_player
-    @player = Player.find(params[:id])
+    if !params[:id].blank?
+      @player = Player.find(params[:id])
+    end
   end
 
   def fetch_players
-    #@players = Player.order("name_family, name_given").paginate(page: params[:page])
-
-    @players = Player.played_in_season(params[:season_id])
-                     .with_name_like(params[:name])
-                     .active(params[:active])
+    @players = Player.active(params[:active])
                      .with_sex(params[:sex])
+                     .played_in_season(params[:season_id])
                      .order("name_family, name_given")
                      .paginate(page: params[:page])
+  end
+
+  def fetch_players_all
+    @players_all = Player.all
+  end
+
+  def fetch_seasons
+    @seasons = Season.order("date_start DESC")
   end
 end

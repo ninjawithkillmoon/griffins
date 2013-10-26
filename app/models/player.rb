@@ -113,23 +113,13 @@ class Player < ActiveRecord::Base
 
   def self.played_in_season(p_season_id)
     unless p_season_id.blank?
-      joins(teams: :season).where("season_id = ?", p_season_id)
-    else
-      scoped
-    end
-  end
-
-  def self.with_name_like(p_name)
-    unless p_name.blank?
-      where("name_family like '%?%' OR name_given like '%?%'", p_name, p_name)
+      joins(teams: {division: :season}).where("season_id = ?", p_season_id)
     else
       scoped
     end
   end
 
   def self.active(p_active)
-
-
     if p_active.blank?
       scoped
     elsif ActiveRecord::ConnectionAdapters::Column.value_to_boolean(p_active)
@@ -141,7 +131,7 @@ class Player < ActiveRecord::Base
 
   def self.with_sex(p_sex)
     unless p_sex.blank?
-      where("sex = ?", p_sex)
+      where("players.sex = ?", p_sex)
     else
       scoped
     end

@@ -7,3 +7,13 @@ jQuery ->
   jQuery("#player_date_of_birth_1i").select2()
   jQuery("#player_date_of_birth_2i").select2()
   jQuery("#player_date_of_birth_3i").select2()
+
+  jQuery("#active").select2(
+    placeholder: "Select a Status",
+    allowClear: true
+  )
+
+  jQuery("#id").select2(
+    placeholder: "Select a Player",
+    allowClear: true
+  )
