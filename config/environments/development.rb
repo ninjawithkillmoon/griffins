@@ -34,4 +34,8 @@ NwkmGriffins::Application.configure do
 
   # Expands the lines which load the assets
   config.assets.debug = true
+
+  config.log_level = :debug
+
+  config.active_record.logger = Logger.new("log/development_sql.log")
 end

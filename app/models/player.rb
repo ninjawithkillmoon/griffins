@@ -15,7 +15,7 @@
 #
 
 class Player < ActiveRecord::Base
-  attr_accessible :date_of_birth, :email, :sex, :name_family, :name_given, :student_number, :student_ceased, :number, :team_ids
+  attr_accessible :date_of_birth, :email, :sex, :name_family, :name_given, :student_number, :student_ceased, :active_ceased, :number, :team_ids
 
   has_and_belongs_to_many :teams
   has_many :invoices
@@ -44,6 +44,12 @@ class Player < ActiveRecord::Base
   validates(:sex, {
       presence: true,
       format: {with: VALID_SEX_REGEX_PLAYER}
+    }
+  )
+
+  validates(:active_ceased, {
+      inclusion: {in: [true, false]},
+      presence: true
     }
   )
 
@@ -78,6 +84,14 @@ class Player < ActiveRecord::Base
     return false
   end
 
+  def active?
+    if active_ceased
+      return false
+    else
+      return true
+    end
+  end
+
   # Returns the player's student number when student_ceased is false, empty string otherwise.
   #
   # * *Args*    :
@@ -95,5 +109,41 @@ class Player < ActiveRecord::Base
 
   def student?
     return !student_number_if_student.blank?
+  end
+
+  def self.played_in_season(p_season_id)
+    unless p_season_id.blank?
+      joins(teams: :season).where("season_id = ?", p_season_id)
+    else
+      scoped
+    end
+  end
+
+  def self.with_name_like(p_name)
+    unless p_name.blank?
+      where("name_family like '%?%' OR name_given like '%?%'", p_name, p_name)
+    else
+      scoped
+    end
+  end
+
+  def self.active(p_active)
+
+
+    if p_active.blank?
+      scoped
+    elsif ActiveRecord::ConnectionAdapters::Column.value_to_boolean(p_active)
+      where("active_ceased != ?", true)
+    else
+      where("active_ceased = ?", true)
+    end
+  end
+
+  def self.with_sex(p_sex)
+    unless p_sex.blank?
+      where("sex = ?", p_sex)
+    else
+      scoped
+    end
   end
 end

@@ -7,7 +7,7 @@ class PlayersController < ApplicationController
   add_breadcrumb "Players", :players_path
 
   def index
-    @players = Player.order("name_family, name_given").paginate(page: params[:page])
+    fetch_players
 
     @total = @players.total_entries
   end
@@ -71,5 +71,16 @@ class PlayersController < ApplicationController
 
   def fetch_player
     @player = Player.find(params[:id])
+  end
+
+  def fetch_players
+    #@players = Player.order("name_family, name_given").paginate(page: params[:page])
+
+    @players = Player.played_in_season(params[:season_id])
+                     .with_name_like(params[:name])
+                     .active(params[:active])
+                     .with_sex(params[:sex])
+                     .order("name_family, name_given")
+                     .paginate(page: params[:page])
   end
 end
