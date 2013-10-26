@@ -88,7 +88,7 @@ class ReportsController < ApplicationController
   end
 
   def fetch_spare_unfiforms
-    @spare_uniforms = SpareUniform.all
+    @spare_uniforms = SpareUniform.with_sex(params[:sex])
   end
 
   def fetch_seasons

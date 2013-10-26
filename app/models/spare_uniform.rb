@@ -17,4 +17,12 @@ class SpareUniform < ActiveRecord::Base
 
     return nil
   end
+
+  def self.with_sex(p_sex)
+    unless p_sex.blank?
+      where("spare_uniforms.sex = ?", p_sex)
+    else
+      scoped
+    end
+  end
 end
