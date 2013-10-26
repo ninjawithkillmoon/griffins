@@ -1,6 +1,6 @@
 <% provide(:title, 'Membership Report') %>
 
-<div id="nwkm_filters">
+<div class="nwkm_filters">
   <%= form_tag 'membership', method: :get do %>
     <%= select_tag :season_id, options_from_collection_for_select(@seasons, :id, :name, params[:season_id]), {class: "span3"} %>
     <%= select_tag :status, options_for_select(membership_types, params[:status]), {class: "span2"} %>
@@ -11,8 +11,8 @@
   <% end %>
 </div>
 
-<div id="nwkm_links">
-  <span>Download as <%= link_to 'CSV', membership_path(params.merge({format: :csv})) %> | <%= link_to 'PDF', membership_path(params.merge({format: :pdf})) %></span>
+<div class="nwkm_links">
+  <span>Download as <%= link_to 'CSV', membership_path(params.merge({format: :csv})) %></span>
 </div>
 
 <%= render 'report_membership' %>

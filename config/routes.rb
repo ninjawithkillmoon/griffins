@@ -14,6 +14,7 @@ NwkmGriffins::Application.routes.draw do
 
   match '/reports/financial',  to: 'reports#financial'  , as: :financial_report
   match '/reports/membership', to: 'reports#membership' , as: :membership
+  match '/reports/uniform_numbers', to: 'reports#uniform_numbers' , as: :uniform_numbers
   
   match '/about',   to: 'static_pages#about'
   match '/contact', to: 'static_pages#contact'

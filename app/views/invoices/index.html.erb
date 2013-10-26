@@ -1,6 +1,6 @@
 <% provide(:title, 'All Invoices') %>
 
-<div id="nwkm_filters">
+<div class="nwkm_filters">
   <%= form_tag invoices_path, method: :get do %>
     <%= select_tag :season_id, options_from_collection_for_select(@seasons, :id, :name, params[:season_id]), {include_blank: true, class: "span3"} %>
     <%= select_tag :player_id, options_from_collection_for_select(@players, :id, :full_name, params[:player_id]), {include_blank: true, class: "span3"} %>

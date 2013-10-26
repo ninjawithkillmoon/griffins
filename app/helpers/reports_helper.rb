@@ -23,8 +23,19 @@ module ReportsHelper
   def membership_csv(p_invoices, options = {})
     CSV.generate(options) do |csv|
       csv << ['Sex', 'Family Name', 'Given Name', 'Email', 'Student Number']
+      
       p_invoices.each do |invoice|
         csv << [invoice.player.sex_string, invoice.player.name_family, invoice.player.name_given, invoice.player.email, invoice.player.student_number_if_student]
+      end
+    end
+  end
+
+  def uniform_numbers_csv(p_players, options = {})
+    CSV.generate(options) do |csv|
+      csv << ['Number', 'Player', 'Additional Player', 'Additional Player']
+
+      for number in 0..99
+        csv << [number].concat(p_players.select{ |player| player.number == number }.map{ |player| player.full_name })
       end
     end
   end

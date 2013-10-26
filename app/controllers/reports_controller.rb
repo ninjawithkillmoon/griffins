@@ -26,28 +26,47 @@ class ReportsController < ApplicationController
     end
   end
 
+  def uniform_numbers
+    validate_input_uniform_numbers
+
+    fetch_players
+
+    add_breadcrumb 'Uniform Numbers Report', '/reports/uniform_numbers'
+
+    respond_to do |format|
+      format.html
+      format.csv { send_data uniform_numbers_csv(@players) }
+    end
+  end
+
   private # ----------------------------------------------------------
 
   def validate_input_financial
-    if params[:date_start].nil?
+    if params[:date_start].blank?
       params[:date_start] = Date.today.beginning_of_year
     end
 
-    if params[:date_end].nil?
+    if params[:date_end].blank?
       params[:date_end] = Date.today.end_of_year
     end
 
     @hideBalance = params[:hide_balance] == "true"
   end
 
+  def validate_input_uniform_numbers
+    if params[:sex].blank?
+      params[:sex] = SEX_MALE
+    end
+  end
+
   def validate_input_membership
     #bare layout
 
-    if params[:status].nil?
+    if params[:status].blank?
       params[:status] = :all
     end
 
-    if params[:season_id].nil?
+    if params[:season_id].blank?
       params[:season_id] = @seasons.first.id
     end
 
@@ -61,9 +80,9 @@ class ReportsController < ApplicationController
     @transactionsBefore = Transaction.before(params[:date_start])
   end
 
-  #def fetch_players
-  #  @players = Player.joins({:teams => {:division => :season}}).where("season_id = ?", @season_id).order("name_family ASC, name_given ASC")
-  #end
+  def fetch_players
+    @players = Player.active(:true).with_sex(params[:sex]).has_number.order(:number)
+  end
 
   def fetch_seasons
     @seasons = Season.order("date_start DESC")
@@ -127,14 +146,6 @@ class ReportsController < ApplicationController
 
     @transactionsDuring.each do |t|
       @report.addTransaction(t.category.parent.name, t.category.name, t.amount_dollars)
-    end
-  end
-
-  def determine_layout
-    if params[:action] == 'membership' && params[:format] == :pdf
-      return 'application'
-    else
-      return 'application'
     end
   end
 

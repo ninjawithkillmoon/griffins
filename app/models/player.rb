@@ -47,12 +47,6 @@ class Player < ActiveRecord::Base
     }
   )
 
-  validates(:active_ceased, {
-      inclusion: {in: [true, false]},
-      presence: true
-    }
-  )
-
   def full_name
     return name_given + " " + name_family
   end
@@ -120,9 +114,18 @@ class Player < ActiveRecord::Base
   end
 
   def self.active(p_active)
-    if p_active.blank?
+    active = p_active
+
+    if active == :true
+      active = "true"
+    elsif active == :false
+      active = "false"
+    end
+      
+
+    if active.blank?
       scoped
-    elsif ActiveRecord::ConnectionAdapters::Column.value_to_boolean(p_active)
+    elsif ActiveRecord::ConnectionAdapters::Column.value_to_boolean(active)
       where("active_ceased != ?", true)
     else
       where("active_ceased = ?", true)
@@ -135,5 +138,9 @@ class Player < ActiveRecord::Base
     else
       scoped
     end
+  end
+
+  def self.has_number
+    where("number IS NOT NULL").where("number >= 0")
   end
 end

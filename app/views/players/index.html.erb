@@ -1,6 +1,6 @@
 <% provide(:title, 'All Players') %>
 
-<div id="nwkm_filters">
+<div class="nwkm_filters">
   <%= form_tag players_path, method: :get do %>
     <%= select_tag :id, options_from_collection_for_select(@players_all, :id, :full_name, params[:id]), {include_blank: true, class: "span3"} %>
     <%= select_tag :season_id, options_from_collection_for_select(@seasons, :id, :name, params[:season_id]), {include_blank: true, class: "span3"} %>
