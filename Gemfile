@@ -7,7 +7,7 @@ gem 'rails_config'
 gem 'formatted_rails_logger'
 gem "therubyracer"
 gem "less-rails"
-gem 'twitter-bootstrap-rails'
+gem 'twitter-bootstrap-rails', '2.1.7'
 gem 'faker'
 gem 'will_paginate'
 gem 'bootstrap-will_paginate'
