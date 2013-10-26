@@ -55,3 +55,10 @@
     <%= f.number_field :number, {step: 1, max: 99} %>
   </div>
 </div>
+
+<div class="control-group">
+  <%= f.label :active_ceased, "No Longer Active", class: "control-label" %>
+  <div class="controls">
+    <%= f.check_box :active_ceased %>
+  </div>
+</div>
