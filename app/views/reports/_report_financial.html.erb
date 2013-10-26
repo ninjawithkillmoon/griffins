@@ -32,7 +32,7 @@
       <tr>
     <% end %>
     <tr class="<%= section.row_class %> border-thick-top">
-      <td><strong>Total revenue for <%= section.name %></strong></td>
+      <td><strong>Total <%= section.revenue? ? "revenue" : "expenses" %> for <%= section.name %></strong></td>
       <td><strong><%= section.total %></strong></td>
     </tr>
     <tr>
