@@ -22,7 +22,7 @@
   <% @report.sectionsCombined.keys.sort.each do |key| %>
     <% section = @report.sectionsCombined[key] %>
     <tr class="info">
-      <td><strong><%= section.revenue? ? "Revenue" : "Expenses" %> for <%= section.name %></strong></td>
+      <td><strong><%= section.revenue? ? "Revenue" : "Expense" %> for <%= section.name %></strong></td>
       <td></td>
     </tr>
     <% section.lines.each do |name, amount| %>
@@ -32,7 +32,7 @@
       <tr>
     <% end %>
     <tr class="<%= section.row_class %> border-thick-top">
-      <td><strong>Total <%= section.revenue? ? "revenue" : "expenses" %> for <%= section.name %></strong></td>
+      <td><strong>Total <%= section.revenue? ? "revenue" : "expense" %> for <%= section.name %></strong></td>
       <td><strong><%= section.total %></strong></td>
     </tr>
     <tr>
